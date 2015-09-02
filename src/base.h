@@ -4,9 +4,11 @@
 #include "define.h"
 #include "attr.h"
 #include "thread.h"
+#ifdef __linux__
 #include "rwlock.h"
-#include "mutex.h"
 #include "cond.h"
+#endif /* __linux */
+#include "mutex.h"
 #include "SimpleIni.h"
 #include "timeutil.h"
 

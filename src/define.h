@@ -19,7 +19,7 @@
 #endif
 
 #ifdef BASE_HAVE_WINDOWS
-# ifdef DLL_EXPORT
+# ifdef DLL_EXPORT				// add '-DDLL_EXPORT' when compile on win32
 #  ifndef LIBBASE_API
 #   define LIBBASE_API  __declspec(dllexport)
 #  endif

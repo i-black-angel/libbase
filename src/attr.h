@@ -4,7 +4,7 @@
 #include "define.h"
 
 namespace base {
-	class Attr
+	class LIBBASE_API Attr
 	{
 	public:
 		enum DetachState {

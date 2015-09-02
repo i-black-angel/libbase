@@ -1,10 +1,10 @@
 #ifndef _RWLOCK_H_
 #define _RWLOCK_H_
 
-#include <pthread.h>
+#include "define.h"
 
 namespace base {
-	class RWLock
+	class LIBBASE_API RWLock
 	{
 	public:
 		RWLock();

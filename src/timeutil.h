@@ -76,19 +76,19 @@ namespace base {
 		virtual ~CTimeUtilTempl();
 
 		// clock_t Clock();
-		void Start();
-		double End() const;
-		int Day() const;
-		int DayOfYear() const;
-		int DayOfWeek() const;
-		int Year() const;
-		int Month() const;
-		int Hour() const;
-		int Minute() const;
-		int Second() const;
-		std::basic_string<CharT> Now() const;
-		std::basic_string<CharT> LocalTime(time_t t) const;
-		void Range(time_t t, time_t &begin_of_day, time_t &end_of_day) const;
+		void start();
+		double end() const;
+		int day() const;
+		int day_of_year() const;
+		int day_of_week() const;
+		int year() const;
+		int month() const;
+		int hour() const;
+		int minute() const;
+		int second() const;
+		std::basic_string<CharT> now() const;
+		std::basic_string<CharT> localtime(time_t t) const;
+		void range(time_t t, time_t &begin_of_day, time_t &end_of_day) const;
 	protected:
 		// std::basic_string<CharT> Yesterday(int year, int month, int day,
 		// 				 int hour = 0, int min = 0, int sec = 0) const; // disable
@@ -118,7 +118,7 @@ namespace base {
 // 	return m_clock_start;
 // }
 	template <typename CharT>
-	void CTimeUtilTempl<CharT>::Start() {
+	void CTimeUtilTempl<CharT>::start() {
 #ifdef _WIN32
 		m_clock_start = clock();
 #else
@@ -127,7 +127,7 @@ namespace base {
 	}
 
 	template <typename CharT>
-	double CTimeUtilTempl<CharT>::End() const {
+	double CTimeUtilTempl<CharT>::end() const {
 		double time_elapsed = 0;
 #ifdef _WIN32
 		time_elapsed = (double)(clock() - m_clock_start) / CLOCKS_PER_SEC;
@@ -142,60 +142,60 @@ namespace base {
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Day() const {
+	int CTimeUtilTempl<CharT>::day() const {
 		return CurrentTime()->tm_mday;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::DayOfYear() const {
+	int CTimeUtilTempl<CharT>::day_of_year() const {
 		return CurrentTime()->tm_yday + 1;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::DayOfWeek() const {
+	int CTimeUtilTempl<CharT>::day_of_week() const {
 		return CurrentTime()->tm_wday;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Year() const {
+	int CTimeUtilTempl<CharT>::year() const {
 		return CurrentTime()->tm_year + 1900;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Month() const {
+	int CTimeUtilTempl<CharT>::month() const {
 		return CurrentTime()->tm_mon + 1;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Hour() const {
+	int CTimeUtilTempl<CharT>::hour() const {
 		return CurrentTime()->tm_hour;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Minute() const {
+	int CTimeUtilTempl<CharT>::minute() const {
 		return CurrentTime()->tm_min;
 	}
 
 	template <typename CharT>
-	int CTimeUtilTempl<CharT>::Second() const {
+	int CTimeUtilTempl<CharT>::second() const {
 		return CurrentTime()->tm_sec;
 	}
 
 	template <typename CharT>
 	tm_ptr CTimeUtilTempl<CharT>::CurrentTime() const {
 		time_t _cur_time = time(NULL);
-		return localtime(&_cur_time);
+		return std::localtime(&_cur_time);
 	}
 
 	template <typename CharT>
-	std::basic_string<CharT> CTimeUtilTempl<CharT>::Now() const {
+	std::basic_string<CharT> CTimeUtilTempl<CharT>::now() const {
 		CharT buffer[64] = {0};
 		_tcsftime(buffer, 64, _T("%Y-%m-%d %H:%M:%S"), CurrentTime());
 		return std::basic_string<CharT>(buffer);
 	}
 
 	template <typename CharT>
-	std::basic_string<CharT> CTimeUtilTempl<CharT>::LocalTime(time_t t) const {
+	std::basic_string<CharT> CTimeUtilTempl<CharT>::localtime(time_t t) const {
 		CharT buffer[64] = {0};
 		time_t __time = t;
 		_tcsftime(buffer, 64, _T("%Y-%m-%d %H:%M:%S"), localtime(&__time));
@@ -203,7 +203,7 @@ namespace base {
 	}
 
 	template <typename CharT>
-	void CTimeUtilTempl<CharT>::Range(time_t t, time_t &begin_of_day,
+	void CTimeUtilTempl<CharT>::range(time_t t, time_t &begin_of_day,
 									  time_t &end_of_day) const {
 		time_t daytime = t;
 		struct tm *st = localtime(&daytime);
@@ -225,12 +225,11 @@ namespace base {
 	typedef CTimeUtilTempl<wchar_t>     CTimeUtilW;
 
 #ifdef _UNICODE
-# define CTimeUtil  CTimeUtilW
+# define TimeUtil  CTimeUtilW
 #else
-# define CTimeUtil CTimeUtilA
+# define TimeUtil CTimeUtilA
 #endif
 }
-
 #ifdef _MSC_VER
 # pragma warning (pop)
 #endif /* _MSC_VER */

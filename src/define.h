@@ -19,6 +19,20 @@
 #endif
 
 #ifdef BASE_HAVE_WINDOWS
+# ifdef DLL_EXPORT
+#  ifndef LIBBASE_API
+#   define LIBBASE_API  __declspec(dllexport)
+#  endif
+# else
+#  ifndef LIBBASE_API
+#   define LIBBASE_API  __declspec(dllimport)
+#  endif
+# endif
+#else   /* non-windows */
+# define LIBBASE_API
+#endif
+
+#ifdef BASE_HAVE_WINDOWS
 # pragma comment(lib,"ws2_32.lib")
 #endif /* BASE_HAVE_WINDOWS */
 

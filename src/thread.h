@@ -16,7 +16,7 @@ namespace base {
 	 * IRunnable interface
 	 * 
 	 */
-	class IRunnable
+	class LIBBASE_API IRunnable
 	{
 	public:
 		virtual ~IRunnable() { }
@@ -27,7 +27,7 @@ namespace base {
 	 * Thread class
 	 * 
 	 */
-	class Thread
+	class LIBBASE_API Thread
 	{
 	public:
 		Thread(Attr *attr = NULL);

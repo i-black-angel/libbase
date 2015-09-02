@@ -1,11 +1,11 @@
 #ifndef _COND_H_
 #define _COND_H_
 
-#include <pthread.h>
+#include "define.h"
 #include "mutex.h"
 
 namespace base {
-	class Cond
+	class LIBBASE_API Cond
 	{
 	public:
 		Cond();

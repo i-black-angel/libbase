@@ -1,23 +1,23 @@
 #include <sys/time.h>
 #include "cond.h"
 
-Cond::Cond()
+base::Cond::Cond()
 {
 	// -std=c++11 or -std=gnu++11
 	// _cond = PTHREAD_COND_INITIALIZER;
 	pthread_cond_init(&_cond, NULL);
 }
 
-Cond::~Cond()
+base::Cond::~Cond()
 {
 }
 
-int Cond::wait(Mutex &mutex)
+int base::Cond::wait(Mutex &mutex)
 {
 	return pthread_cond_wait(&_cond, mutex.mutex());
 }
 
-int Cond::timedwait(Mutex &mutex, time_t sec)
+int base::Cond::timedwait(Mutex &mutex, time_t sec)
 {
 	struct timespec tsp;
 	struct timeval now;
@@ -29,10 +29,10 @@ int Cond::timedwait(Mutex &mutex, time_t sec)
 	return pthread_cond_timedwait(&_cond, mutex.mutex(), &tsp);
 }
 
-int Cond::signal() {
+int base::Cond::signal() {
 	return pthread_cond_signal(&_cond);
 }
 
-int Cond::broadcast() {
+int base::Cond::broadcast() {
 	return pthread_cond_broadcast(&_cond);
 }

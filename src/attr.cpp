@@ -1,69 +1,69 @@
 #include "attr.h"
 
 #ifdef BASE_HAVE_WINDOWS
-Attr::Attr() 
+base::Attr::Attr() 
 {
 }
 
-Attr::~Attr()
+base::Attr::~Attr()
 {
     
 }
 
-int Attr::getdetachstate() const
+int base::Attr::getdetachstate() const
 {
 	return 0;
 }
 
-int Attr::setdetachstate(int detachstate) {
+int base::Attr::setdetachstate(int detachstate) {
 	return 0;
 }
 
-int Attr::getstack(void **stackaddr, size_t *stacksize) const {
+int base::Attr::getstack(void **stackaddr, size_t *stacksize) const {
 	return 0;
 }
 
-int Attr::setstack(void *stackaddr, size_t stacksize) {
+int base::Attr::setstack(void *stackaddr, size_t stacksize) {
 	return 0;
 }
 
-int Attr::getstacksize(size_t *stacksize) const {
+int base::Attr::getstacksize(size_t *stacksize) const {
 	return 0;
 }
 
-int Attr::setstacksize(size_t stacksize) {
+int base::Attr::setstacksize(size_t stacksize) {
 	return 0;
 }
 
-int Attr::getguardsize(size_t *guardsize) const
+int base::Attr::getguardsize(size_t *guardsize) const
 {
 	return 0;
 }
 
-int Attr::setguardsize(size_t guardsize) {
+int base::Attr::setguardsize(size_t guardsize) {
 	return 0;
 }
 
 #else
 
-Attr::Attr() 
+base::Attr::Attr() 
 {
 	pthread_attr_init(&_attr);
 }
 
-Attr::~Attr()
+base::Attr::~Attr()
 {
     
 }
 
-int Attr::getdetachstate() const
+int base::Attr::getdetachstate() const
 {
 	int detachstate = 0;
 	pthread_attr_getdetachstate(&_attr, &detachstate);
 	return detachstate;
 }
 
-int Attr::setdetachstate(int detachstate) {
+int base::Attr::setdetachstate(int detachstate) {
 	int state = 0;
 	switch (detachstate) {
 	case JOINABLE:
@@ -74,28 +74,28 @@ int Attr::setdetachstate(int detachstate) {
 	return pthread_attr_setdetachstate(&_attr, state);
 }
 
-int Attr::getstack(void **stackaddr, size_t *stacksize) const {
+int base::Attr::getstack(void **stackaddr, size_t *stacksize) const {
 	return pthread_attr_getstack(&_attr, stackaddr, stacksize);
 }
 
-int Attr::setstack(void *stackaddr, size_t stacksize) {
+int base::Attr::setstack(void *stackaddr, size_t stacksize) {
 	return pthread_attr_setstack(&_attr, stackaddr, stacksize);
 }
 
-int Attr::getstacksize(size_t *stacksize) const {
+int base::Attr::getstacksize(size_t *stacksize) const {
 	return pthread_attr_getstacksize(&_attr, stacksize);
 }
 
-int Attr::setstacksize(size_t stacksize) {
+int base::Attr::setstacksize(size_t stacksize) {
 	return pthread_attr_setstacksize(&_attr, stacksize);
 }
 
-int Attr::getguardsize(size_t *guardsize) const
+int base::Attr::getguardsize(size_t *guardsize) const
 {
 	return pthread_attr_getguardsize(&_attr, guardsize);
 }
 
-int Attr::setguardsize(size_t guardsize) {
+int base::Attr::setguardsize(size_t guardsize) {
 	return pthread_attr_setguardsize(&_attr, guardsize);
 }
 #endif /* BASE_HAVE_WINDOWS */

@@ -3,19 +3,21 @@
 
 #include <pthread.h>
 
-class RWLock
-{
-public:
-    RWLock();
-    virtual ~RWLock();
+namespace base {
+	class RWLock
+	{
+	public:
+		RWLock();
+		virtual ~RWLock();
 
-	int rdlock();
-	int wrlock();
-	int unlock();
-	int tryrdlock();
-	int trywrlock();
-private:
-	pthread_rwlock_t _rwlock;
-};
+		int rdlock();
+		int wrlock();
+		int unlock();
+		int tryrdlock();
+		int trywrlock();
+	private:
+		pthread_rwlock_t _rwlock;
+	};
+}
 
 #endif /* _RWLOCK_H_ */

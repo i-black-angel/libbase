@@ -5,7 +5,7 @@
 
 #ifndef BASE_HAVE_WINDOWS
 void * on_thread_callback(void *pvoid) {
-	Thread *t = static_cast<Thread *>(pvoid);
+	base::Thread *t = static_cast<base::Thread *>(pvoid);
 	if (NULL != t) {
 		t->run();
 	}
@@ -13,7 +13,7 @@ void * on_thread_callback(void *pvoid) {
 }
 
 void * on_runnable_callback(void *pvoid) {
-	IRunnable *r = static_cast<IRunnable *>(pvoid);
+	base::IRunnable *r = static_cast<base::IRunnable *>(pvoid);
 	if (NULL != r) {
 		r->run();
 	}
@@ -23,7 +23,7 @@ void * on_runnable_callback(void *pvoid) {
 #else
 
 unsigned int CALLBACK on_thread_callback(void *pvoid) {
-	Thread *t = static_cast<Thread *>(pvoid);
+	base::Thread *t = static_cast<base::Thread *>(pvoid);
 	if (NULL != t) {
 		t->run();
 	}
@@ -31,7 +31,7 @@ unsigned int CALLBACK on_thread_callback(void *pvoid) {
 }
 
 unsigned int CALLBACK on_runnable_callback(void *pvoid) {
-	IRunnable *r = static_cast<IRunnable *>(pvoid);
+	base::IRunnable *r = static_cast<base::IRunnable *>(pvoid);
 	if (NULL != r) {
 		r->run();
 	}
@@ -41,7 +41,7 @@ unsigned int CALLBACK on_runnable_callback(void *pvoid) {
 #endif /* BASE_HAVE_LINUX */
 
 
-Thread::Thread(Attr *attr) 
+base::Thread::Thread(Attr *attr) 
 {
 	_self = 0;
 	_routine = NULL;
@@ -49,12 +49,12 @@ Thread::Thread(Attr *attr)
 	_attr = attr;
 }
 
-Thread::Thread(IRunnable *runnable, Attr *attr) {
+base::Thread::Thread(IRunnable *runnable, Attr *attr) {
 	_runnable = runnable;
 	_attr = attr;
 }
 
-Thread::~Thread()
+base::Thread::~Thread()
 {
     _routine = NULL;
 	_runnable = NULL;
@@ -63,7 +63,7 @@ Thread::~Thread()
 
 #ifndef BASE_HAVE_WINDOWS
 
-int Thread::start()
+int base::Thread::start()
 {
 	int res = 0;
 	// using IRunnable
@@ -91,28 +91,28 @@ int Thread::start()
 	return res;
 }
 
-void Thread::exit()
+void base::Thread::exit()
 {
 	pthread_exit(NULL);
 }
 
-int Thread::join()
+int base::Thread::join()
 {
 	return pthread_join(_self, NULL);
 }
 
-int Thread::detach() {
+int base::Thread::detach() {
 	return pthread_detach(_self);
 }
 
-int Thread::cancel() {
+int base::Thread::cancel() {
 	return pthread_cancel(_self);
 }
 
 //////////////////////////////////////////////////
 #else /* windows */
 /////////////////////////////////////////////////
-int Thread::start()
+int base::Thread::start()
 {
 	if (NULL != _runnable) {
 		_routine = on_runnable_callback;
@@ -143,13 +143,13 @@ int Thread::start()
 	return BASE_OK;
 }
 
-void Thread::exit()
+void base::Thread::exit()
 {
 	// TODO:: must be rewrite later.
 	ExitThread(0);
 }
 
-int Thread::join()
+int base::Thread::join()
 {
 	DWORD rc = WaitForSingleObject(_self, INFINITE);
 	if (WAIT_FAILED == rc) return BASE_ERROR;;
@@ -158,12 +158,12 @@ int Thread::join()
 	return BASE_OK;
 }
 
-int Thread::detach() {
+int base::Thread::detach() {
 	// TODO:: must be rewrite later.
 	return 0;
 }
 
-int Thread::cancel() {
+int base::Thread::cancel() {
 	// TODO:: must be rewrite later.
 	BOOL res = TerminateThread(_self, 0);
 	if (res) return BASE_OK;
@@ -176,7 +176,7 @@ int Thread::cancel() {
  * this is a virtual function for sub-class implementation
  * 
  */
-void Thread::run()
+void base::Thread::run()
 {
 	// TODO::implementation in sub-class
 }

@@ -3,34 +3,35 @@
 
 #include "define.h"
 
-class Attr
-{
-public:
-	enum DetachState {
-		JOINABLE,
-		DETACHED
-	};
-public:
-    Attr();
-    virtual ~Attr();
-	int getdetachstate() const;
-	int setdetachstate(int detachstate);
-	int getstack(void **stackaddr, size_t *stacksize) const; // unsupported
-	int setstack(void *stackaddr, size_t stacksize);   // unsupported
-	int getstacksize(size_t *stacksize) const;
-	int setstacksize(size_t stacksize);
-	int getguardsize(size_t *guardsize) const;
-	int setguardsize(size_t guardsize);
+namespace base {
+	class Attr
+	{
+	public:
+		enum DetachState {
+			JOINABLE,
+			DETACHED
+		};
+	public:
+		Attr();
+		virtual ~Attr();
+		int getdetachstate() const;
+		int setdetachstate(int detachstate);
+		int getstack(void **stackaddr, size_t *stacksize) const; // unsupported
+		int setstack(void *stackaddr, size_t stacksize);   // unsupported
+		int getstacksize(size_t *stacksize) const;
+		int setstacksize(size_t stacksize);
+		int getguardsize(size_t *guardsize) const;
+		int setguardsize(size_t guardsize);
 	
 #ifdef BASE_HAVE_WINDOWS
-	SECURITY_ATTRIBUTES *attr() { return &_attr; }
-private:
-	SECURITY_ATTRIBUTES _attr;
+		SECURITY_ATTRIBUTES *attr() { return &_attr; }
+	private:
+		SECURITY_ATTRIBUTES _attr;
 #else
-	pthread_attr_t *attr() { return &_attr; }
-private:
-	pthread_attr_t _attr;
+		pthread_attr_t *attr() { return &_attr; }
+	private:
+		pthread_attr_t _attr;
 #endif /* BASE_HAVE_WINDOWS */
-};
-
+	};
+}
 #endif /* _ATTR_H_ */

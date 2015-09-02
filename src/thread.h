@@ -1,15 +1,14 @@
 #ifndef _THREAD_H_
 #define _THREAD_H_
 
-#ifdef _WIN32
-#include <windows.h>
-typedef unsigned int (__stdcall *thread_callback)(void *);
-#else
-#include <pthread.h>
-typedef void * (*thread_callback)(void *pvoid);
-#endif /* _WIN32 */
-
+#include "define.h"
 #include "attr.h"				// thread attributation
+
+#ifdef BASE_HAVE_WINDOWS
+typedef unsigned int (__stdcall *thread_callback)(void *);
+#else  /* linux */
+typedef void * (*thread_callback)(void *pvoid);
+#endif /* BASE_HAVE_WINDOWS */
 
 /**
  * IRunnable interface
@@ -32,10 +31,15 @@ public:
     Thread(Attr *attr = NULL);
 	Thread(IRunnable *runnable, Attr *attr = NULL);
     virtual ~Thread();
-	pthread_t self() const {
-		return this->_self;
+#ifdef BASE_HAVE_WINDOWS
+	DWORD self() const {
+		return ::GetCurrentThreadId();
 	}
-	// attributes
+#else	
+	pthread_t self() const {
+		return pthread_self();
+	}
+#endif /* BASE_HAVE_WINDOWS */
 	
 	// activity
 	int start();
@@ -45,12 +49,13 @@ public:
 	int cancel();
 
 	virtual void run();
-protected:
-	void set_self(pthread_t self) {
-		_self = self;
-	}
+	
 private:
+#ifdef BASE_HAVE_WINDOWS
+	HANDLE _self;
+#else
 	pthread_t _self;
+#endif /* BASE_HAVE_WINDOWS */
 	thread_callback _routine;
 	IRunnable *_runnable;
 	Attr *_attr;

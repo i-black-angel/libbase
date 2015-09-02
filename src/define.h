@@ -1,13 +1,15 @@
 #ifndef _DEFINE_H_
 #define _DEFINE_H_
 
-#if defined(_WIN32) || defined(_WIN64)
+#include "platform.h"
+
+#ifdef BASE_HAVE_WINDOWS
 # include <ws2tcpip.h>
 # include <winsock2.h>
 # include <windows.h>
 # include <io.h>
 # include <process.h>    /* _beginthreadex */
-#elif defined(__linux__)
+#else
 # include <unistd.h>
 # include <stdint.h>
 # include <sys/socket.h>
@@ -16,7 +18,11 @@
 # include <pthread.h>
 #endif
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef BASE_HAVE_WINDOWS
+# pragma comment(lib,"ws2_32.lib")
+#endif /* BASE_HAVE_WINDOWS */
+
+#ifdef BASE_HAVE_WINDOWS
 # ifndef __socket_t_defined
 #  define __socket_t_defined
 typedef SOCKET socket_t;
@@ -39,5 +45,8 @@ typedef int socket_t;
 # define __byte_defined
 typedef unsigned char byte;
 #endif
+
+#define BASE_OK     0
+#define BASE_ERROR  1
 
 #endif /* _DEFINE_H_ */

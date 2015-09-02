@@ -10,7 +10,6 @@ libbase_la_LIBADD = -lpthread
 
 libbase_la_SOURCES =				\
 thread.cpp					\
-mutex.cpp					\
 cond.cpp					\
 attr.cpp					\
 ConvertUTF.c					\
@@ -27,4 +26,5 @@ cond.h						\
 define.h					\
 ConvertUTF.h					\
 utils.h						\
+platform.h					\
 base.h    

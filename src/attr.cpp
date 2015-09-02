@@ -1,5 +1,51 @@
 #include "attr.h"
 
+#ifdef BASE_HAVE_WINDOWS
+Attr::Attr() 
+{
+}
+
+Attr::~Attr()
+{
+    
+}
+
+int Attr::getdetachstate() const
+{
+	return 0;
+}
+
+int Attr::setdetachstate(int detachstate) {
+	return 0;
+}
+
+int Attr::getstack(void **stackaddr, size_t *stacksize) const {
+	return 0;
+}
+
+int Attr::setstack(void *stackaddr, size_t stacksize) {
+	return 0;
+}
+
+int Attr::getstacksize(size_t *stacksize) const {
+	return 0;
+}
+
+int Attr::setstacksize(size_t stacksize) {
+	return 0;
+}
+
+int Attr::getguardsize(size_t *guardsize) const
+{
+	return 0;
+}
+
+int Attr::setguardsize(size_t guardsize) {
+	return 0;
+}
+
+#else
+
 Attr::Attr() 
 {
 	pthread_attr_init(&_attr);
@@ -52,3 +98,4 @@ int Attr::getguardsize(size_t *guardsize) const
 int Attr::setguardsize(size_t guardsize) {
 	return pthread_attr_setguardsize(&_attr, guardsize);
 }
+#endif /* BASE_HAVE_WINDOWS */

@@ -1,7 +1,7 @@
 #ifndef _ATTR_H_
 #define _ATTR_H_
 
-#include <pthread.h>
+#include "define.h"
 
 class Attr
 {
@@ -21,9 +21,16 @@ public:
 	int setstacksize(size_t stacksize);
 	int getguardsize(size_t *guardsize) const;
 	int setguardsize(size_t guardsize);
+	
+#ifdef BASE_HAVE_WINDOWS
+	SECURITY_ATTRIBUTES *attr() { return &_attr; }
+private:
+	SECURITY_ATTRIBUTES _attr;
+#else
 	pthread_attr_t *attr() { return &_attr; }
 private:
 	pthread_attr_t _attr;
+#endif /* BASE_HAVE_WINDOWS */
 };
 
 #endif /* _ATTR_H_ */

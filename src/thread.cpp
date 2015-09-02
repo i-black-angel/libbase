@@ -3,17 +3,13 @@
 #include <cstdio>
 #include "thread.h"
 
-#ifdef _WIN32
-unsigned int CALLBACK on_thread_callback(void *pvoid)
-#else
-void * on_thread_callback(void *pvoid)
-#endif /* _WIN32 */
-{
+#ifndef BASE_HAVE_WINDOWS
+void * on_thread_callback(void *pvoid) {
 	Thread *t = static_cast<Thread *>(pvoid);
 	if (NULL != t) {
 		t->run();
 	}
-	return NULL;
+	return NULL;	
 }
 
 void * on_runnable_callback(void *pvoid) {
@@ -23,6 +19,27 @@ void * on_runnable_callback(void *pvoid) {
 	}
 	return NULL;
 }
+
+#else
+
+unsigned int CALLBACK on_thread_callback(void *pvoid) {
+	Thread *t = static_cast<Thread *>(pvoid);
+	if (NULL != t) {
+		t->run();
+	}
+	return NULL;	
+}
+
+unsigned int CALLBACK on_runnable_callback(void *pvoid) {
+	IRunnable *r = static_cast<IRunnable *>(pvoid);
+	if (NULL != r) {
+		r->run();
+	}
+	return NULL;	
+}
+
+#endif /* BASE_HAVE_LINUX */
+
 
 Thread::Thread(Attr *attr) 
 {
@@ -44,9 +61,12 @@ Thread::~Thread()
 	_attr = NULL;
 }
 
+#ifndef BASE_HAVE_WINDOWS
+
 int Thread::start()
 {
 	int res = 0;
+	// using IRunnable
 	if (NULL != _runnable) {
 		_routine = on_runnable_callback;
 		const pthread_attr_t *thread_attr = NULL;
@@ -58,13 +78,8 @@ int Thread::start()
 		}
 		return res;
 	}
-// #if defined(_WIN32) || defined(_WIN64)
-// 	unsigned int thread_id = 0;
-// 	HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, _routine, static_cast<void *>(this), 0, &thread_id);
-// 	if (NULL == handle) {
-// 		std::cerr << "can't create thread" << std::endl;
-// 	}
-// #else
+	
+	// using Thread
 	_routine = on_thread_callback;
 	const pthread_attr_t *thread_attr = NULL;
 	if (NULL != _attr)
@@ -73,7 +88,6 @@ int Thread::start()
 	if (0 != res) {
 		std::cerr << "can't create thread: " << strerror(res) << std::endl;
 	}
-// #endif /* _WIN32 */
 	return res;
 }
 
@@ -95,7 +109,74 @@ int Thread::cancel() {
 	return pthread_cancel(_self);
 }
 
+//////////////////////////////////////////////////
+#else /* windows */
+/////////////////////////////////////////////////
+int Thread::start()
+{
+	if (NULL != _runnable) {
+		_routine = on_runnable_callback;
+		LPSECURITY_ATTRIBUTES thread_attr = NULL;
+		if (NULL != _attr)
+			thread_attr = _attr->attr();
+		_self = (HANDLE) _beginthreadex(thread_attr, 0, _routine,
+										static_cast<void *>(_runnable),
+										0, NULL);
+		if (NULL == _self) {
+			std::cerr << "can't create thread: " << strerror(errno) << std::endl;
+			return BASE_ERROR;
+		}
+		return BASE_OK;
+	}
+
+	_routine = on_thread_callback;
+	LPSECURITY_ATTRIBUTES thread_attr = NULL;
+	if (NULL != _attr)
+		thread_attr = _attr->attr();
+	_self = (HANDLE) _beginthreadex(thread_attr, 0, _routine,
+									static_cast<void *>(this)
+									0, NULL);
+	if (NULL == _self) {
+		std::cerr << "can't create thread: " << strerror(errno) << std::endl;
+		return BASE_ERROR;
+	}
+	return BASE_OK;
+}
+
+void Thread::exit()
+{
+	// TODO:: must be rewrite later.
+	ExitThread(0);
+}
+
+int Thread::join()
+{
+	DWORD rc = WaitForSingleObject(_self, INFINITE);
+	if (WAIT_FAILED == rc) return BASE_ERROR;;
+	BOOL rc2 = CloseHandle(_self);
+	if (!rc2) return BASE_ERROR;
+	return BASE_OK;
+}
+
+int Thread::detach() {
+	// TODO:: must be rewrite later.
+	return 0;
+}
+
+int Thread::cancel() {
+	// TODO:: must be rewrite later.
+	BOOL res = TerminateThread(_self, 0);
+	if (res) return BASE_OK;
+	return BASE_ERROR;
+}
+
+#endif /* BASE_HAVE_WINDOWS */
+
+/** 
+ * this is a virtual function for sub-class implementation
+ * 
+ */
 void Thread::run()
 {
-	// implementation in sub-class
+	// TODO::implementation in sub-class
 }

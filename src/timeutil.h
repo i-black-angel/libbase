@@ -198,7 +198,7 @@ namespace base {
 	std::basic_string<CharT> CTimeUtilTempl<CharT>::localtime(time_t t) const {
 		CharT buffer[64] = {0};
 		time_t __time = t;
-		_tcsftime(buffer, 64, _T("%Y-%m-%d %H:%M:%S"), localtime(&__time));
+		_tcsftime(buffer, 64, _T("%Y-%m-%d %H:%M:%S"), std::localtime(&__time));
 		return std::basic_string<CharT>(buffer);
 	}
 
@@ -206,7 +206,7 @@ namespace base {
 	void CTimeUtilTempl<CharT>::range(time_t t, time_t &begin_of_day,
 									  time_t &end_of_day) const {
 		time_t daytime = t;
-		struct tm *st = localtime(&daytime);
+		struct tm *st = std::localtime(&daytime);
 		st->tm_hour = 0;
 		st->tm_min  = 0;
 		st->tm_sec  = 0;

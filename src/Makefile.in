@@ -124,7 +124,7 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libbase_la_DEPENDENCIES =
 am_libbase_la_OBJECTS = thread.lo cond.lo attr.lo ConvertUTF.lo \
-	rwlock.lo
+	rwlock.lo dirs.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -348,7 +348,8 @@ thread.cpp					\
 cond.cpp					\
 attr.cpp					\
 ConvertUTF.c					\
-rwlock.cpp    
+rwlock.cpp					\
+dirs.cpp
 
 include_HEADERS = \
 thread.h					\
@@ -362,7 +363,8 @@ define.h					\
 ConvertUTF.h					\
 utils.h						\
 platform.h					\
-base.h    
+base.h						\
+dirs.h
 
 all: all-am
 
@@ -446,6 +448,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ConvertUTF.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/attr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cond.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dirs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rwlock.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/thread.Plo@am__quote@
 

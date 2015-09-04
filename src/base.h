@@ -11,5 +11,6 @@
 #include "mutex.h"
 #include "SimpleIni.h"
 #include "timeutil.h"
+#include "dirs.h"
 
 #endif /* _BASE_H_ */

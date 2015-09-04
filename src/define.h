@@ -9,6 +9,7 @@
 # include <windows.h>
 # include <io.h>
 # include <process.h>    /* _beginthreadex */
+# include <direct.h>     /* _getcwd */
 #else
 # include <unistd.h>
 # include <stdint.h>
@@ -16,6 +17,10 @@
 # include <arpa/inet.h>
 # include <netdb.h>
 # include <pthread.h>
+#endif
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
 #endif
 
 #ifdef BASE_HAVE_WINDOWS
@@ -45,9 +50,13 @@ typedef SOCKET socket_t;
 # define	STDIN_FILENO	0	/* Standard input.  */
 # define	STDOUT_FILENO	1	/* Standard output.  */
 # define	STDERR_FILENO	2	/* Standard error output.  */
-# define     sleep(n)       Sleep((n) * 1000)
-# define     usleep(n)      Sleep((n) / 1000)
-# define     snprintf       _snprintf
+# define    getcwd          _getcwd
+# define    chdir           _chdir
+# define    mkdir           _mkdir
+# define    rmdir           _rmdir
+# define    snprintf        _snprintf
+# define    sleep(n)        Sleep((n) * 1000)
+# define    usleep(n)       Sleep((n) / 1000)
 #else  /* non-windows */
 # ifndef __socket_t_defined
 #  define __socket_t_defined

@@ -13,7 +13,8 @@ thread.cpp					\
 cond.cpp					\
 attr.cpp					\
 ConvertUTF.c					\
-rwlock.cpp    
+rwlock.cpp					\
+dirs.cpp
 
 include_HEADERS =				\
 thread.h					\
@@ -27,4 +28,5 @@ define.h					\
 ConvertUTF.h					\
 utils.h						\
 platform.h					\
-base.h    
+base.h						\
+dirs.h

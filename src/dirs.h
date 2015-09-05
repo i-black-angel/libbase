@@ -9,14 +9,14 @@ namespace base {
 	 * 
 	 * @return home dir
 	 */
-	const char *get_home_dir(void);
+	LIBBASE_API const char *get_home_dir(void);
 
 	/** 
 	 * return temp directory without last '\\' or '/'
 	 * 
 	 * @return 
 	 */
-	const char *get_tmp_dir(void);
+	LIBBASE_API const char *get_tmp_dir(void);
 }
 
 #endif /* _DIRS_H_ */

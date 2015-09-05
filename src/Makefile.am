@@ -14,6 +14,7 @@ cond.cpp					\
 attr.cpp					\
 ConvertUTF.c					\
 rwlock.cpp					\
+utils.cpp					\
 dirs.cpp
 
 include_HEADERS =				\

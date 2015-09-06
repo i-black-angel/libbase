@@ -18,3 +18,24 @@ void base::split(const string &content, const string &delim, vector<string> *ret
 		retarr->push_back("");
 	}
 }
+
+const char *base::getaddr(const char *cp) {
+	struct addrinfo *ailist = NULL, *aip = NULL;
+	struct addrinfo hint;
+	hint.ai_flags = 0;
+	hint.ai_family = 0;
+	hint.ai_socktype = SOCK_STREAM;
+	hint.ai_protocol = 0;
+	hint.ai_addrlen = 0;
+	hint.ai_canonname = NULL;
+	hint.ai_addr = NULL;
+	hint.ai_next = NULL;
+
+	getaddrinfo(cp, NULL, &hint, &ailist);
+
+	for (aip = ailist; aip != NULL; aip = aip->ai_next) {
+		struct sockaddr_in *addr = (sockaddr_in *)aip->ai_addr;
+		return inet_ntoa(addr->sin_addr);
+	}
+	return cp;
+}

@@ -49,9 +49,16 @@ namespace base {
 		int join();
 		int detach();
 		int cancel();
-
+		
 		virtual void run();
-	
+
+		/**
+		 * i wanna using Thread in some classes,
+		 * so, may be i can use Thread _t instead of Thread *_t
+		 */
+		void set_func(IRunnable *runnable) {
+			_runnable = runnable;
+		}
 	private:
 #ifdef BASE_HAVE_WINDOWS
 		HANDLE _self;

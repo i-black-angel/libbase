@@ -30,4 +30,5 @@ ConvertUTF.h					\
 utils.h						\
 platform.h					\
 base.h						\
+datahandler.h					\
 dirs.h

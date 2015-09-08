@@ -59,6 +59,7 @@ namespace base {
 		void clear() {
 			_mutex.lock();
 			std::deque<T>::clear();
+			_mutex.unlock();
 		}
 	private:
 		Mutex _mutex;

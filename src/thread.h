@@ -54,7 +54,7 @@ namespace base {
 
 		/**
 		 * i wanna using Thread in some classes,
-		 * so, may be i can use Thread _t instead of Thread *_t
+		 * so, may be i can use Thread _t instead of Thread *_t now
 		 */
 		void set_func(IRunnable *runnable) {
 			_runnable = runnable;

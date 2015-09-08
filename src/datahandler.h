@@ -4,7 +4,7 @@
 #include <deque>
 
 namespace base {
-	class LIBBASE_API Event
+	class Event
 	{
 	public:
 		Event() { }

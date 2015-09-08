@@ -5,8 +5,9 @@
 
 namespace base {
 #ifdef BASE_HAVE_WINDOWS
-	class LIBBASE_API Mutex
+	class Mutex
 	{
+	public:
 		Mutex() {
 			InitializeCriticalSection(&cs);
 		}
@@ -31,7 +32,7 @@ namespace base {
 #else  // linux
 #include <errno.h>
 
-	class LIBBASE_API Mutex
+	class Mutex
 	{
 	public:
 		Mutex() {

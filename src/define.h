@@ -20,7 +20,7 @@
 #endif
 
 #ifndef _CRT_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
+# define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
 #endif
 
 #ifdef BASE_HAVE_WINDOWS

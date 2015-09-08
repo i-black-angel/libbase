@@ -1,6 +1,3 @@
-#ifndef BASE_HAVE_WINDOWS
-# include <sys/time.h>
-#endif /* BASE_HAVE_WINDOWS */
 #include "cond.h"
 
 #ifdef BASE_HAVE_WINDOWS
@@ -19,7 +16,7 @@ int base::Cond::wait(Mutex &mutex)
 
 int base::Cond::timedwait(Mutex &mutex, time_t sec)
 {
-	return WaitForSingleObject(_cond, sec * 1000);
+	return WaitForSingleObject(_cond, (DWORD)(sec * 1000));
 }
 
 int base::Cond::signal() {
@@ -33,6 +30,9 @@ int base::Cond::broadcast() {
 }
 
 #else
+
+#include <sys/time.h>
+
 base::Cond::Cond()
 {
 	// -std=c++11 or -std=gnu++11

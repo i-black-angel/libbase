@@ -1,4 +1,6 @@
-#include <sys/time.h>
+#ifndef BASE_HAVE_WINDOWS
+# include <sys/time.h>
+#endif /* BASE_HAVE_WINDOWS */
 #include "cond.h"
 
 #ifdef BASE_HAVE_WINDOWS

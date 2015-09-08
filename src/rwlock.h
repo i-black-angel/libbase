@@ -16,7 +16,11 @@ namespace base {
 		int tryrdlock();
 		int trywrlock();
 	private:
+#ifdef BASE_HAVE_WINDOWS
+		// TODO::
+#else
 		pthread_rwlock_t _rwlock;
+#endif /* BASE_HAVE_WINDOWS */
 	};
 }
 

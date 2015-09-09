@@ -9,11 +9,11 @@ libbase_la_LDFLAGS=$(LTLDFLAGS)
 libbase_la_LIBADD = -lpthread
 
 libbase_la_SOURCES =				\
-thread.cpp					\
-cond.cpp					\
-attr.cpp					\
+pthread/thread.cpp				\
+pthread/cond.cpp				\
+pthread/attr.cpp				\
+pthread/rwlock.cpp				\
 ConvertUTF.c					\
-rwlock.cpp					\
 utils.cpp					\
 dirs.cpp
 

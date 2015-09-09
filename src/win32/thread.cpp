@@ -8,7 +8,6 @@
 # pragma warning (disable: 4996)
 #endif
 
-#ifdef BASE_HAVE_WINDOWS
 unsigned int CALLBACK on_thread_callback(void *pvoid) {
 	base::Thread *t = static_cast<base::Thread *>(pvoid);
 	if (NULL != t) {
@@ -24,24 +23,6 @@ unsigned int CALLBACK on_runnable_callback(void *pvoid) {
 	}
 	return NULL;	
 }
-#else
-void * on_thread_callback(void *pvoid) {
-	base::Thread *t = static_cast<base::Thread *>(pvoid);
-	if (NULL != t) {
-		t->run();
-	}
-	return NULL;	
-}
-
-void * on_runnable_callback(void *pvoid) {
-	base::IRunnable *r = static_cast<base::IRunnable *>(pvoid);
-	if (NULL != r) {
-		r->run();
-	}
-	return NULL;
-}
-#endif /* BASE_HAVE_WINDOWS */
-
 
 base::Thread::Thread(Attr *attr) 
 {
@@ -63,7 +44,6 @@ base::Thread::~Thread()
 	_attr = NULL;
 }
 
-#ifdef BASE_HAVE_WINDOWS
 int base::Thread::start()
 {
 	if (NULL != _runnable) {
@@ -120,63 +100,6 @@ int base::Thread::cancel() {
 	BOOL res = TerminateThread(_self, 0);
 	if (res) return BASE_OK;
 	return BASE_ERROR;
-}
-#else
-int base::Thread::start()
-{
-	int res = 0;
-	// using IRunnable
-	if (NULL != _runnable) {
-		_routine = on_runnable_callback;
-		const pthread_attr_t *thread_attr = NULL;
-		if (NULL != _attr)
-			thread_attr = _attr->attr();
-		res = pthread_create(&_self, thread_attr, _routine, static_cast<void *>(_runnable));
-		if (0 != res) {
-			std::cerr << "can't create thread: " << strerror(res) << std::endl;
-		}
-		return res;
-	}
-	
-	// using Thread
-	_routine = on_thread_callback;
-	const pthread_attr_t *thread_attr = NULL;
-	if (NULL != _attr)
-		thread_attr = _attr->attr();
-	res = pthread_create(&_self, thread_attr, _routine, static_cast<void *>(this));
-	if (0 != res) {
-		std::cerr << "can't create thread: " << strerror(res) << std::endl;
-	}
-	return res;
-}
-
-void base::Thread::exit()
-{
-	pthread_exit(NULL);
-}
-
-int base::Thread::join()
-{
-	return pthread_join(_self, NULL);
-}
-
-int base::Thread::detach() {
-	return pthread_detach(_self);
-}
-
-int base::Thread::cancel() {
-	return pthread_cancel(_self);
-}
-#endif /* BASE_HAVE_WINDOWS */
-
-
-/** 
- * this is a virtual function for sub-class implementation
- * 
- */
-void base::Thread::run()
-{
-	// TODO::implementation in sub-class
 }
 
 #ifdef _MSC_VER

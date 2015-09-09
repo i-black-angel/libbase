@@ -595,7 +595,7 @@ PACKAGE_STRING='libbase 1.0.0'
 PACKAGE_BUGREPORT='iblackangel@163.com'
 PACKAGE_URL=''
 
-ac_unique_file="src/thread.cpp"
+ac_unique_file="src/thread.h"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>

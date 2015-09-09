@@ -11,7 +11,7 @@ namespace base {
 #else  /* linux */
 	typedef void * (*thread_callback)(void *pvoid);
 #endif /* BASE_HAVE_WINDOWS */
-
+	
 	/**
 	 * IRunnable interface
 	 * 
@@ -49,8 +49,11 @@ namespace base {
 		int join();
 		int detach();
 		int cancel();
-		
-		virtual void run();
+
+		/** 
+		 * this is a virtual function for sub-calss implementation
+		 */
+		virtual void run() { }
 
 		/**
 		 * i wanna using Thread in some classes,

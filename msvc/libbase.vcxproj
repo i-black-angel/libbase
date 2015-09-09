@@ -47,6 +47,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>-DDLL_EXPORT %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
@@ -70,13 +71,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\attr.cpp" />
-    <ClCompile Include="..\src\cond.cpp" />
     <ClCompile Include="..\src\ConvertUTF.c" />
     <ClCompile Include="..\src\dirs.cpp" />
-    <ClCompile Include="..\src\rwlock.cpp" />
-    <ClCompile Include="..\src\thread.cpp" />
     <ClCompile Include="..\src\utils.cpp" />
+    <ClCompile Include="..\src\win32\attr.cpp" />
+    <ClCompile Include="..\src\win32\cond.cpp" />
+    <ClCompile Include="..\src\win32\rwlock.cpp" />
+    <ClCompile Include="..\src\win32\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\attr.h" />

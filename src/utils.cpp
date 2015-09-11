@@ -39,3 +39,40 @@ const char *base::getaddr(const char *cp) {
 	}
 	return cp;
 }
+
+bool base::get_availabe_port(in_port_t &port) {
+	bool result = true;
+
+	// create a socket
+	socket_t sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+
+	// create a sockaddr, and set port to 0
+	struct sockaddr_in addr;
+	addr.sin_family = AF_INET;
+	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	addr.sin_port = 0;
+
+	// bind
+	int err = bind(sockfd, (struct sockaddr *)&addr, sizeof(addr));
+	if ( 0 != err ) {
+		result = false;
+		close(sockfd);
+		return result;
+	}
+
+	// using getsockname return available port
+	struct sockaddr_in connaddr;
+	socklen_t len = sizeof(connaddr);
+	err = getsockname(sockfd, (struct sockaddr *)&connaddr, &len);
+	if (0 != err) {
+		result = false;
+		close(sockfd);
+		return result;
+	}
+
+	// parse port
+	port = ntohs(connaddr.sin_port);
+
+	close(sockfd);
+	return result;
+}

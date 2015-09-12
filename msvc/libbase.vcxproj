@@ -77,6 +77,7 @@
     <ClCompile Include="..\src\win32\attr.cpp" />
     <ClCompile Include="..\src\win32\cond.cpp" />
     <ClCompile Include="..\src\win32\rwlock.cpp" />
+    <ClCompile Include="..\src\win32\signalhandler.cpp" />
     <ClCompile Include="..\src\win32\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     <ClInclude Include="..\src\mutex.h" />
     <ClInclude Include="..\src\platform.h" />
     <ClInclude Include="..\src\rwlock.h" />
+    <ClInclude Include="..\src\signalhandler.h" />
     <ClInclude Include="..\src\SimpleIni.h" />
     <ClInclude Include="..\src\thread.h" />
     <ClInclude Include="..\src\timeutil.h" />

@@ -18,6 +18,7 @@
 # include <netdb.h>
 # include <pthread.h>
 #endif
+#include <stdint.h>
 
 #ifndef _CRT_SECURE_NO_WARNINGS
 # define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
@@ -42,6 +43,8 @@
 #  define __socket_t_defined
 typedef SOCKET socket_t;
 # endif
+typedef     uint32_t       in_addr_t;
+typedef     uint16_t       in_port_t;
 /* Standard file descriptors.  */
 # define	STDIN_FILENO	0	/* Standard input.  */
 # define	STDOUT_FILENO	1	/* Standard output.  */
@@ -53,6 +56,7 @@ typedef SOCKET socket_t;
 # define    snprintf        _snprintf_s
 # define    sleep(n)        Sleep((n) * 1000)
 # define    usleep(n)       Sleep((n) / 1000)
+# define    close           _close
 #else  /* non-windows */
 # ifndef __socket_t_defined
 #  define __socket_t_defined

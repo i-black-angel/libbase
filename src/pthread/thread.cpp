@@ -67,7 +67,7 @@ int base::Thread::start()
 	return res;
 }
 
-void base::Thread::exit()
+void base::Thread::thread_exit()
 {
 	pthread_exit(NULL);
 }

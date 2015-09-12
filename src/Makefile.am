@@ -13,6 +13,7 @@ pthread/thread.cpp				\
 pthread/cond.cpp				\
 pthread/attr.cpp				\
 pthread/rwlock.cpp				\
+pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
 dirs.cpp
@@ -31,4 +32,5 @@ utils.h						\
 platform.h					\
 base.h						\
 datahandler.h					\
+signalhandler.h					\
 dirs.h

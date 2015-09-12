@@ -75,7 +75,7 @@ int base::Thread::start()
 	return BASE_OK;
 }
 
-void base::Thread::exit()
+void base::Thread::thread_exit()
 {
 	// TODO:: must be rewrite later.
 	ExitThread(0);

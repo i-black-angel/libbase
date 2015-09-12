@@ -125,8 +125,8 @@ LTLIBRARIES = $(lib_LTLIBRARIES)
 libbase_la_DEPENDENCIES =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libbase_la_OBJECTS = pthread/thread.lo pthread/cond.lo \
-	pthread/attr.lo pthread/rwlock.lo ConvertUTF.lo utils.lo \
-	dirs.lo
+	pthread/attr.lo pthread/rwlock.lo pthread/signalhandler.lo \
+	ConvertUTF.lo utils.lo dirs.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -350,6 +350,7 @@ pthread/thread.cpp				\
 pthread/cond.cpp				\
 pthread/attr.cpp				\
 pthread/rwlock.cpp				\
+pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
 dirs.cpp
@@ -368,6 +369,7 @@ utils.h						\
 platform.h					\
 base.h						\
 datahandler.h					\
+signalhandler.h					\
 dirs.h
 
 all: all-am
@@ -453,6 +455,8 @@ pthread/attr.lo: pthread/$(am__dirstamp) \
 	pthread/$(DEPDIR)/$(am__dirstamp)
 pthread/rwlock.lo: pthread/$(am__dirstamp) \
 	pthread/$(DEPDIR)/$(am__dirstamp)
+pthread/signalhandler.lo: pthread/$(am__dirstamp) \
+	pthread/$(DEPDIR)/$(am__dirstamp)
 
 libbase.la: $(libbase_la_OBJECTS) $(libbase_la_DEPENDENCIES) $(EXTRA_libbase_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libbase_la_LINK) -rpath $(libdir) $(libbase_la_OBJECTS) $(libbase_la_LIBADD) $(LIBS)
@@ -471,6 +475,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/attr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/cond.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/rwlock.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/signalhandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/thread.Plo@am__quote@
 
 .c.o:

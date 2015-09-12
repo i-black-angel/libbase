@@ -45,10 +45,10 @@ namespace base {
 	
 		// activity
 		int start();
-		static void exit();
 		int join();
 		int detach();
 		int cancel();
+		static void thread_exit();
 
 		/** 
 		 * this is a virtual function for sub-calss implementation

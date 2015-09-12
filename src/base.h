@@ -12,5 +12,6 @@
 #include "dirs.h"
 #include "utils.h"
 #include "datahandler.h"
+#include "signalhandler.h"
 
 #endif /* _BASE_H_ */

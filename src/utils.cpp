@@ -56,7 +56,11 @@ bool base::get_availabe_port(in_port_t &port) {
 	int err = bind(sockfd, (struct sockaddr *)&addr, sizeof(addr));
 	if ( 0 != err ) {
 		result = false;
+#ifdef BASE_HAVE_WINDOWS
 		closesocket(sockfd);
+#else
+		close(sockfd);
+#endif /* BASE_HAVE_WINDOWS */
 		return result;
 	}
 
@@ -66,13 +70,21 @@ bool base::get_availabe_port(in_port_t &port) {
 	err = getsockname(sockfd, (struct sockaddr *)&connaddr, &len);
 	if (0 != err) {
 		result = false;
+#ifdef BASE_HAVE_WINDOWS
 		closesocket(sockfd);
+#else
+		close(sockfd);
+#endif /* BASE_HAVE_WINDOWS */
 		return result;
 	}
 
 	// parse port
 	port = ntohs(connaddr.sin_port);
 
+#ifdef BASE_HAVE_WINDOWS
 	closesocket(sockfd);
+#else
+	close(sockfd);
+#endif /* BASE_HAVE_WINDOWS */
 	return result;
 }

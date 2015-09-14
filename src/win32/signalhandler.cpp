@@ -14,12 +14,10 @@ BOOL WINAPI HandlerRoutine(DWORD dwCtrlType)
     case CTRL_BREAK_EVENT:
     case CTRL_CLOSE_EVENT:
     case CTRL_SHUTDOWN_EVENT:
-        // before_interrupt_quit_func();
-		// OnQuitFunc();
 		if (NULL != base::SignalHandler::quit) {
 			base::SignalHandler::quit();
 		}
-        return TRUE;
+		exit(0);
     }
 	return FALSE;
 }  

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+OnQuitFunc base::SignalHandler::quit = NULL;
+
 bool base::SignalHandler::handle() {
 	sigemptyset(&_mask);
 	sigaddset(&_mask, SIGINT);
@@ -30,8 +32,11 @@ void base::SignalHandler::run() {
 		exit(1);
 	}
 	// using subclass func quit()
-	quit();
-
+	// quit();
+	if (NULL != quit) {
+		quit();
+	}
+	
 	// exit all process
 	exit(0);
 }

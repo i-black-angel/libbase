@@ -72,4 +72,9 @@ typedef unsigned char byte;
 #define BASE_OK     0
 #define BASE_ERROR  1
 
+#ifndef _MSC_VER
+# define WINAPI
+# define CALLBACK
+#endif
+
 #endif /* _DEFINE_H_ */

@@ -2,7 +2,10 @@
 #define _SIGNALHANDLER_H_
 
 #include <stdexcept>
+#include "define.h"
 #include "thread.h"
+
+typedef void (CALLBACK *OnQuitFunc)(void);
 
 namespace base {
 	class LIBBASE_API SignalHandler : public IRunnable
@@ -22,14 +25,16 @@ namespace base {
 			}
 		}
 
+		void reg_quit_func(OnQuitFunc callback) {
+			quit = callback;
+		}
+
 		bool handle();
+		
+		static OnQuitFunc quit;
 	protected:
 		virtual void run();
 		
-		/** 
-		 * TODO::implement this func on sub-class
-		 */
-		virtual void quit() { }
 	private:
 #ifndef BASE_HAVE_WINDOWS
 		sigset_t _mask;

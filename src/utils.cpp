@@ -40,7 +40,7 @@ const char *base::getaddr(const char *cp) {
 	return cp;
 }
 
-bool base::get_availabe_port(in_port_t &port) {
+bool base::get_available_port(in_port_t &port) {
 	bool result = true;
 
 	// create a socket

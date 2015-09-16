@@ -28,7 +28,7 @@ namespace base {
 	 * 
 	 * @return true if success, otherwise false
 	 */
-	LIBBASE_API bool get_availabe_port(in_port_t &port);
+	LIBBASE_API bool get_available_port(in_port_t &port);
 }
 
 #endif /* _UTILS_H_ */

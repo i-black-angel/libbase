@@ -45,6 +45,7 @@ typedef SOCKET socket_t;
 # endif
 typedef     uint32_t       in_addr_t;
 typedef     uint16_t       in_port_t;
+typedef     size_t         ssize_t;
 /* Standard file descriptors.  */
 # define	STDIN_FILENO	0	/* Standard input.  */
 # define	STDOUT_FILENO	1	/* Standard output.  */

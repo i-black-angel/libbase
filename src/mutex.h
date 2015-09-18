@@ -5,7 +5,7 @@
 
 namespace base {
 #ifdef BASE_HAVE_WINDOWS
-	class Mutex
+	class LIBBASE_API Mutex
 	{
 	public:
 		Mutex() {

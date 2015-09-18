@@ -11,7 +11,7 @@ namespace base {
 # endif /* INVALID_SOCKET */
 #endif /* BASE_HAVE_WINDOWS */
 
-	class TCPBase
+	class LIBBASE_API TCPBase
 	{
 	public:
 		TCPBase() { _sockfd = INVALID_SOCKET; }
@@ -22,7 +22,7 @@ namespace base {
 		socket_t _sockfd;
 	};
 	
-	class TCPServer : public TCPBase
+	class LIBBASE_API TCPServer : public TCPBase
 	{
 	public:
 		TCPServer();
@@ -41,7 +41,7 @@ namespace base {
 		in_port_t _port;
 	};
 
-	class TCPClient : public TCPBase
+	class LIBBASE_API TCPClient : public TCPBase
 	{
 	public:
 		TCPClient();

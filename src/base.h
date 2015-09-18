@@ -13,5 +13,6 @@
 #include "utils.h"
 #include "datahandler.h"
 #include "signalhandler.h"
+#include "netipc.h"
 
 #endif /* _BASE_H_ */

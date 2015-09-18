@@ -16,6 +16,7 @@ pthread/rwlock.cpp				\
 pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
+netipc.cpp					\
 dirs.cpp
 
 include_HEADERS =				\
@@ -33,4 +34,5 @@ platform.h					\
 base.h						\
 datahandler.h					\
 signalhandler.h					\
+netipc.h					\
 dirs.h

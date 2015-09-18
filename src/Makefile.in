@@ -126,7 +126,7 @@ libbase_la_DEPENDENCIES =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libbase_la_OBJECTS = pthread/thread.lo pthread/cond.lo \
 	pthread/attr.lo pthread/rwlock.lo pthread/signalhandler.lo \
-	ConvertUTF.lo utils.lo dirs.lo
+	ConvertUTF.lo utils.lo netipc.lo dirs.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -353,6 +353,7 @@ pthread/rwlock.cpp				\
 pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
+netipc.cpp					\
 dirs.cpp
 
 include_HEADERS = \
@@ -370,6 +371,7 @@ platform.h					\
 base.h						\
 datahandler.h					\
 signalhandler.h					\
+netipc.h					\
 dirs.h
 
 all: all-am
@@ -471,6 +473,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ConvertUTF.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dirs.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/netipc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/attr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/cond.Plo@am__quote@

@@ -34,4 +34,5 @@ namespace base {
 #endif /* BASE_HAVE_WINDOWS */
 	};
 }
+
 #endif /* _ATTR_H_ */

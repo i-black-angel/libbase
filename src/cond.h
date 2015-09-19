@@ -29,4 +29,5 @@ namespace base {
 #endif /* BASE_HAVE_WINDOWS */
 	};
 }
+
 #endif /* _COND_H_ */

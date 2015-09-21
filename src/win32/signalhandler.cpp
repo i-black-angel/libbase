@@ -4,29 +4,32 @@
 
 using namespace std;
 
-OnQuitFunc base::SignalHandler::quit = NULL;
+namespace base {
+	OnQuitFunc SignalHandler::quit = NULL;
 
-BOOL WINAPI HandlerRoutine(DWORD dwCtrlType)  
-{
-	switch (dwCtrlType)
+	BOOL WINAPI HandlerRoutine(DWORD dwCtrlType)  
 	{
-    case CTRL_C_EVENT:
-    case CTRL_BREAK_EVENT:
-    case CTRL_CLOSE_EVENT:
-    case CTRL_SHUTDOWN_EVENT:
-		if (NULL != base::SignalHandler::quit) {
-			base::SignalHandler::quit();
+		switch (dwCtrlType)
+		{
+		case CTRL_C_EVENT:
+		case CTRL_BREAK_EVENT:
+		case CTRL_CLOSE_EVENT:
+		case CTRL_SHUTDOWN_EVENT:
+			if (NULL != SignalHandler::quit) {
+				SignalHandler::quit();
+			}
+			exit(0);
 		}
-		exit(0);
-    }
-	return FALSE;
-}  
+		return FALSE;
+	}  
 
-bool base::SignalHandler::handle() {
-	::SetConsoleCtrlHandler(HandlerRoutine, TRUE);
-	return true;
-}
+	bool SignalHandler::handle() {
+		::SetConsoleCtrlHandler(HandlerRoutine, TRUE);
+		return true;
+	}
 
-void base::SignalHandler::run() {
-	/* do nothing */
+	void SignalHandler::run() {
+		/* do nothing */
+	}
+
 }

@@ -5,9 +5,9 @@
 #include "define.h"
 #include "thread.h"
 
-typedef void (CALLBACK *OnQuitFunc)(void);
-
 namespace base {
+	typedef void (CALLBACK *OnQuitFunc)(void);
+	
 	class LIBBASE_API SignalHandler : public IRunnable
 	{
 	public:

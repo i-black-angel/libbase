@@ -1,7 +1,7 @@
 #ifndef _PLATFORM_H_
 #define _PLATFORM_H_
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _MSC_VER
 # ifndef BASE_HAVE_WINDOWS
 #  define BASE_HAVE_WINDOWS
 # endif

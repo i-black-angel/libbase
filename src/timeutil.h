@@ -17,7 +17,7 @@
 
 #include <ctime>
 #include <string>
-#ifndef _WIN32
+#ifndef _MSC_VER
 #include <sys/time.h>
 #endif
 
@@ -32,7 +32,7 @@ using namespace std;
 # define TU_ASSERT(x)
 #endif
 
-#ifdef _WIN32
+#ifdef _MSC_VER
 # include <tchar.h>
 #else
 # ifdef _UNICODE
@@ -96,11 +96,11 @@ namespace base {
 		// 				int hour = 0, int min = 0, int sec = 0) const; // disable
 		tm_ptr CurrentTime() const;
 	private:
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _MSC_VER
 		clock_t m_clock_start;		// In win32, using m_clock_start records the starting of program
 #else
 		struct timeval m_time_start; // In linux, using m_time_start records the starting of program
-#endif /* _WIN32 */
+#endif /* _MSC_VER */
 	};
 
 	template <typename CharT>
@@ -119,17 +119,17 @@ namespace base {
 // }
 	template <typename CharT>
 	void CTimeUtilTempl<CharT>::start() {
-#ifdef _WIN32
+#ifdef _MSC_VER
 		m_clock_start = clock();
 #else
 		gettimeofday(&m_time_start, NULL);
-#endif /* _WIN32 */
+#endif /* _MSC_VER */
 	}
 
 	template <typename CharT>
 	double CTimeUtilTempl<CharT>::end() const {
 		double time_elapsed = 0;
-#ifdef _WIN32
+#ifdef _MSC_VER
 		time_elapsed = (double)(clock() - m_clock_start) / CLOCKS_PER_SEC;
 #else
 		struct timeval time_end;
@@ -137,7 +137,7 @@ namespace base {
 		time_elapsed = (time_end.tv_sec - m_time_start.tv_sec) * 1000000
 			+ (time_end.tv_usec - m_time_start.tv_usec);
 		time_elapsed /= 1000000;
-#endif /* _WIN32 */
+#endif /* _MSC_VER */
 		return time_elapsed;
 	}
 

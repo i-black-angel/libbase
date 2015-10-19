@@ -55,6 +55,7 @@ typedef     size_t         ssize_t;
 # define    mkdir           _mkdir
 # define    rmdir           _rmdir
 # define    snprintf        _snprintf_s
+# define    useconds_t      DWORD
 # define    sleep(n)        Sleep((n) * 1000)
 # define    usleep(n)       Sleep((n) / 1000)
 # define    close           _close

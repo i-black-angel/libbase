@@ -64,6 +64,7 @@ typedef     size_t         ssize_t;
 #  define __socket_t_defined
 typedef int socket_t;
 # endif
+# define    closesocket     close
 #endif
 
 #ifndef __byte_defined

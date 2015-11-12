@@ -9,6 +9,7 @@ namespace base {
 # ifndef INVALID_SOCKET
 #  define INVALID_SOCKET (socket_t)(~0)
 # endif /* INVALID_SOCKET */
+# define SOCKET_ERROR    (-1)
 #endif /* BASE_HAVE_WINDOWS */
 
 	class LIBBASE_API TCPBase

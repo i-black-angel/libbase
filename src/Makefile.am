@@ -5,6 +5,7 @@ libbase_la_LDFLAGS=$(LTLDFLAGS)
 
 ######################################
 # Cflags and Libs
+libbase_la_CPPFLAGS = -I$(top_srcdir)/include $(all_includes)
 # libbase_la_CXXFLAGS = $(LIBICONV_CFLAGS)
 libbase_la_LIBADD = -lpthread
 
@@ -18,21 +19,3 @@ ConvertUTF.c					\
 utils.cpp					\
 netipc.cpp					\
 dirs.cpp
-
-include_HEADERS =				\
-thread.h					\
-attr.h						\
-rwlock.h					\
-mutex.h						\
-SimpleIni.h					\
-timeutil.h					\
-cond.h						\
-define.h					\
-ConvertUTF.h					\
-utils.h						\
-platform.h					\
-base.h						\
-datahandler.h					\
-signalhandler.h					\
-netipc.h					\
-dirs.h

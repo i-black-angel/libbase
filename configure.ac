@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([libbase], [1.0.0], [iblackangel@163.com])
-AC_CONFIG_SRCDIR([src/thread.h])
+AC_CONFIG_SRCDIR([src/ConvertUTF.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
@@ -40,6 +40,7 @@ AC_FUNC_STRTOD
 AC_CHECK_FUNCS([gettimeofday memmove memset strerror strtol])
 
 AC_CONFIG_FILES([Makefile
+                 include/Makefile
                  src/Makefile])
 AC_CONFIG_FILES([libbase.pc])
 AC_OUTPUT

@@ -36,7 +36,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -49,17 +48,13 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>-DLIBBASE_EXPORT %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
-    <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(windir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -67,7 +62,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-DLIBBASE_EXPORT %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -77,10 +72,25 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(windir)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\attr.h" />
+    <ClInclude Include="..\include\base.h" />
+    <ClInclude Include="..\include\cond.h" />
+    <ClInclude Include="..\include\ConvertUTF.h" />
+    <ClInclude Include="..\include\datahandler.h" />
+    <ClInclude Include="..\include\define.h" />
+    <ClInclude Include="..\include\dirs.h" />
+    <ClInclude Include="..\include\mutex.h" />
+    <ClInclude Include="..\include\netipc.h" />
+    <ClInclude Include="..\include\platform.h" />
+    <ClInclude Include="..\include\rwlock.h" />
+    <ClInclude Include="..\include\signalhandler.h" />
+    <ClInclude Include="..\include\SimpleIni.h" />
+    <ClInclude Include="..\include\thread.h" />
+    <ClInclude Include="..\include\timeutil.h" />
+    <ClInclude Include="..\include\utils.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ConvertUTF.c" />
     <ClCompile Include="..\src\dirs.cpp" />
@@ -91,24 +101,6 @@
     <ClCompile Include="..\src\win32\rwlock.cpp" />
     <ClCompile Include="..\src\win32\signalhandler.cpp" />
     <ClCompile Include="..\src\win32\thread.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\src\attr.h" />
-    <ClInclude Include="..\src\base.h" />
-    <ClInclude Include="..\src\cond.h" />
-    <ClInclude Include="..\src\ConvertUTF.h" />
-    <ClInclude Include="..\src\datahandler.h" />
-    <ClInclude Include="..\src\define.h" />
-    <ClInclude Include="..\src\dirs.h" />
-    <ClInclude Include="..\src\mutex.h" />
-    <ClInclude Include="..\src\netipc.h" />
-    <ClInclude Include="..\src\platform.h" />
-    <ClInclude Include="..\src\rwlock.h" />
-    <ClInclude Include="..\src\signalhandler.h" />
-    <ClInclude Include="..\src\SimpleIni.h" />
-    <ClInclude Include="..\src\thread.h" />
-    <ClInclude Include="..\src\timeutil.h" />
-    <ClInclude Include="..\src\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

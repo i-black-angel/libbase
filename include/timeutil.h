@@ -3,7 +3,8 @@
  * @author Shusheng Shao <iblackangel@163.com>
  * @date   Thu Jun 18 16:23:43 2015
  * 
- * @brief  A cross-platform library that provides a simple API to get and calculate system time
+ * @brief  A cross-platform library that provides a simple API to get
+ *         and calculate system time
  * 
  * 
  */

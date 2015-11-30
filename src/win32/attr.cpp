@@ -18,15 +18,15 @@ int base::Attr::setdetachstate(int detachstate) {
 	return 0;
 }
 
-int base::Attr::getstack(void **stackaddr, size_t *stacksize) const {
-	return 0;
-}
+// int base::Attr::getstack(void **stackaddr, size_t *stacksize) const {
+// 	return 0;
+// }
 
-int base::Attr::setstack(void *stackaddr, size_t stacksize) {
-	return 0;
-}
+// int base::Attr::setstack(void *stackaddr, size_t stacksize) {
+// 	return 0;
+// }
 
-int base::Attr::getstacksize(size_t *stacksize) const {
+size_t base::Attr::getstacksize() const {
 	return 0;
 }
 
@@ -34,7 +34,7 @@ int base::Attr::setstacksize(size_t stacksize) {
 	return 0;
 }
 
-int base::Attr::getguardsize(size_t *guardsize) const
+size_t base::Attr::getguardsize() const
 {
 	return 0;
 }

@@ -18,4 +18,5 @@ pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
 netipc.cpp					\
-dirs.cpp
+dirs.cpp					\
+process.cpp

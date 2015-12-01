@@ -14,4 +14,5 @@ base.h						\
 datahandler.h					\
 signalhandler.h					\
 netipc.h					\
-dirs.h
+dirs.h						\
+process.h

@@ -22,55 +22,50 @@
 
 namespace base {	
 	Dir::Dir() {
-		_pathptr = new string();
 	}
 
 	Dir::Dir(const Dir &dir) {
-		_pathptr = new string();
-		*_pathptr = dir.path();
+		_path = dir.path();
 	}
 
 	Dir::Dir(const string &path) {
-		_pathptr = new string();
-		*_pathptr = path;
+		_path = path;
 	}
 
-	Dir& Dir::operator=(const Dir &rhs) {
-		// Check for self-assignment!
-		if (this == &rhs)
-			return *this;
-		_pathptr = new string();
-		*_pathptr = rhs.path();
-		return *this;
-	}
+	// Dir& Dir::operator=(const Dir &rhs) {
+	// 	// Check for self-assignment!
+	// 	if (this == &rhs)
+	// 		return *this;
+	// 	// _pathptr = new string();
+	// 	// *_pathptr = rhs.path();
+	// 	_path = rhs.path();
+	// 	return *this;
+	// }
 	
 	Dir::~Dir() {
-		if (NULL != _pathptr) {
-			delete _pathptr; _pathptr = NULL;
-		}	
 	}
 
 	bool Dir::cd(const string &dirname) {
 		if (0 != chdir(dirname.c_str()))
 			return false;
-		*_pathptr = current_path();
+		_path = current_path();
 		return true;
 	}
 
 	bool Dir::cdup() {
 		if (0 != chdir(".."))
 			return false;
-		*_pathptr = current_path();
+		_path = current_path();
 		return true;
 	}
 
 	string Dir::dirname() const {
 		string res;
-		if (_pathptr->empty()) {
+		if (_path.empty()) {
 			return res;
 		}
 		char str[1024] = {0};
-		strcpy(str, _pathptr->c_str());
+		strcpy(str, _path.c_str());
 		const char *delim = DIRECTORY_SEPARATOR;
 		char *p = strtok(str, delim);
 		if (NULL != p) {
@@ -90,7 +85,7 @@ namespace base {
 	}
 
 	bool Dir::exists() const {
-		if (0 != access(_pathptr->c_str(), F_OK)) {
+		if (0 != access(_path.c_str(), F_OK)) {
 			return false;
 		}
 		return true;
@@ -110,14 +105,14 @@ namespace base {
 	}
 
 	bool Dir::isreadable() const {
-		if (0 != access(_pathptr->c_str(), F_OK | R_OK)) {
+		if (0 != access(_path.c_str(), F_OK | R_OK)) {
 			return false;
 		}
 		return true;
 	}
 
 	bool Dir::isroot() const {
-		return (*_pathptr == root_path());
+		return (_path == root_path());
 	}
 
 	bool Dir::makedir(const string &dirname) {
@@ -140,7 +135,7 @@ namespace base {
 	}
 
 	string Dir::path() const {
-		return *_pathptr;
+		return _path;
 	}
 
 	bool Dir::remove(const string &filename) {
@@ -158,7 +153,7 @@ namespace base {
 	}
 
 	void Dir::set_path(const string &path) {
-		*_pathptr = path;
+		_path = path;
 	}
 
 	Dir Dir::current() {
@@ -239,9 +234,9 @@ namespace base {
 
 	string Dir::temp_path() {
 #ifdef _MSC_VER
-		string tmppath = getenv("TMP");		
+		string tmppath = getenv("TMP");
 #else
-		string tmppath = "/tmp";			
+		string tmppath = "/tmp";
 #endif
 		return tmppath;
 	}

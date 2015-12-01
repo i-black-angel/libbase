@@ -24,7 +24,7 @@ namespace base {
 		string   path() const;
 		void     set_path(const string &path);
 
-		Dir& operator=(const Dir &rhs);
+		// Dir& operator=(const Dir &rhs);
 		
 	public:
 		static bool exists(const string &name);
@@ -56,7 +56,7 @@ namespace base {
 		static Dir temp();
 		static string temp_path();
 	private:
-		std::string *_pathptr;
+		std::string _path;
 	};
 }
 

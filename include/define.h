@@ -26,7 +26,7 @@
 #endif
 
 #ifdef BASE_HAVE_WINDOWS
-# ifdef LIBBASE_EXPORT				// add '-DLIBBASE_EXPORT' when compile on win32
+# ifdef LIBBASE_EXPORT
 #   define LIBBASE_API
 # else
 #   define LIBBASE_API

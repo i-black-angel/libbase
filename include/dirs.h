@@ -53,7 +53,7 @@ namespace base {
 		static Dir temp();
 		static string temp_path();
 	private:
-		string _path;
+		std::string _path;
 	};
 }
 

@@ -1,5 +1,16 @@
 #include "dirs.h"
 
+#ifdef _MSC_VER
+# pragma warning (push)
+# pragma warning (disable: 4996)
+#endif
+
+#define RW_OK  0x6
+#define R_OK   0x4
+#define W_OK   0x2
+#define X_OK   0x1
+#define F_OK   0x0
+
 namespace base {
 	Dir::Dir() {
 	}
@@ -37,7 +48,7 @@ namespace base {
 		string res;
 		char str[1024] = {0};
 		strcpy(str, _path.c_str());
-	    const char *delim = "/";
+	    const char *delim = "\\";
 		char *p = strtok(str, delim);
 		if (NULL != p) {
 			res = p;
@@ -64,7 +75,7 @@ namespace base {
 
 	string Dir::filepath(const string &filename) {
 		string res;
-		string::size_type idx = filename.find_last_of("/");
+		string::size_type idx = filename.find_last_of("\\");
 		if (string::npos == idx)
 			return res;
 		if (0 == idx) {
@@ -83,11 +94,11 @@ namespace base {
 	}
 
 	bool Dir::isroot() const {
-		return (_path == "/");
+		return (_path == root_path());
 	}
 
 	bool Dir::makedir(const string &dirname) {
-		if (0 != mkdir(dirname.c_str(), 0755)) {
+		if (0 != mkdir(dirname.c_str())) {
 			return false;
 		}
 		return true;
@@ -179,3 +190,7 @@ namespace base {
 		return tmppath;
 	}	
 }
+
+#ifdef _MSC_VER
+# pragma warning (pop)
+#endif

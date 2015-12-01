@@ -48,6 +48,8 @@ namespace base {
 		 * @see root(), current_path(), home_path(), and temp_path()
 		 */
 		static string root_path();
+		static Dir runtime();
+		static string runtime_path();
 		static Dir temp();
 		static string temp_path();
 	private:

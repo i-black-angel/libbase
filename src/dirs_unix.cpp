@@ -176,6 +176,26 @@ namespace base {
 		return rootpath;
 	}
 
+	Dir Dir::runtime() {
+		Dir dir(runtime_path());
+		return dir;
+	}
+	
+	string Dir::runtime_path() {
+		string res;
+		const char *pathname = "/proc/self/exe";
+		char buf[512] = {0};
+		ssize_t buflen = readlink(pathname, buf, sizeof(buf));
+		if (buflen == -1) {
+			return res;
+		}
+		if (buflen < sizeof(buf)) {
+			buf[buflen] = '\0';
+		}
+		res = filepath(string(buf));
+		return res;
+	}
+	
 	Dir Dir::temp() {
 		Dir dir(temp_path());
 		return dir;

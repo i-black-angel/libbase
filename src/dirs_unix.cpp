@@ -69,7 +69,7 @@ namespace base {
 		return res;
 	}
 
-	bool Dir::exists(const string &name) const {
+	bool Dir::exists(const string &name) {
 		if (0 != access(name.c_str(), F_OK)) {
 			return false;
 		}
@@ -83,11 +83,17 @@ namespace base {
 		return true;
 	}
 
-	string Dir::filepath(const string &filename) const {
+	string Dir::filepath(const string &filename) {
+		string res;
 		string::size_type idx = filename.find_last_of("/");
 		if (string::npos == idx)
-			return filename;
-		return filename.substr(0, idx + 1);
+			return res;
+		if (0 == idx) {
+			res = filename.substr(0, idx + 1);
+		} else {
+			res = filename.substr(0, idx);
+		}
+		return res;
 	}
 
 	bool Dir::isreadable() const {
@@ -101,7 +107,7 @@ namespace base {
 		return (_path == "/");
 	}
 
-	bool Dir::makedir(const string &dirname) const {
+	bool Dir::makedir(const string &dirname) {
 		if (0 != mkdir(dirname.c_str(), 0755)) {
 			return false;
 		}
@@ -118,14 +124,14 @@ namespace base {
 		return this->_path;
 	}
 
-	bool Dir::remove(const string &filename) const {
+	bool Dir::remove(const string &filename) {
 		if (0 != unlink(filename.c_str())) {
 			return false;
 		}
 		return true;
 	}
 
-	bool Dir::removedir(const string &dirname) const {
+	bool Dir::removedir(const string &dirname) {
 		if (0 != rmdir(dirname.c_str())) {
 			return false;
 		}
@@ -179,5 +185,4 @@ namespace base {
 		string tmppath = "/tmp";
 		return tmppath;
 	}
-	
 }

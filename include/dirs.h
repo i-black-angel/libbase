@@ -18,18 +18,19 @@ namespace base {
 		bool     cd(const string &dirname);
 		bool     cdup();
 		string   dirname() const;
-		bool     exists(const string &name) const;
 		bool     exists() const;
-		string   filepath(const string &filename) const;
 		bool     isreadable() const;
 		bool     isroot() const;
-		bool     makedir(const string &dirname) const;
-		bool     mv(const string &oldname, const string &newname);
 		string   path() const;
-		bool     remove(const string &filename) const;
-		bool     removedir(const string &dirname) const;
 		void     set_path(const string &path);
 	public:
+		static bool exists(const string &name);
+		static string filepath(const string &filename);
+		static bool makedir(const string &dirname);
+		static bool mv(const string &oldname, const string &newname);
+		static bool remove(const string &filename);
+		static bool removedir(const string &dirname);
+		
 		static Dir current();
 		static string current_path();
 		static Dir home();

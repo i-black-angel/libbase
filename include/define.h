@@ -10,6 +10,7 @@
 # include <io.h>
 # include <process.h>    /* _beginthreadex */
 # include <direct.h>     /* _getcwd */
+# include <shlwapi.h>	 /* PathRemoveFileSpec */
 #else
 # include <unistd.h>
 # include <stdint.h>
@@ -36,6 +37,7 @@
 
 #ifdef BASE_HAVE_WINDOWS
 # pragma comment(lib,"ws2_32.lib")
+# pragma comment(lib, "shlwapi.lib")
 #endif /* BASE_HAVE_WINDOWS */
 
 #ifdef BASE_HAVE_WINDOWS

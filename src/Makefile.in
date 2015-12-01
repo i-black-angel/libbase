@@ -127,8 +127,7 @@ am_libbase_la_OBJECTS = pthread/libbase_la-thread.lo \
 	pthread/libbase_la-cond.lo pthread/libbase_la-attr.lo \
 	pthread/libbase_la-rwlock.lo \
 	pthread/libbase_la-signalhandler.lo libbase_la-ConvertUTF.lo \
-	libbase_la-utils.lo libbase_la-netipc.lo \
-	libbase_la-dirs_unix.lo
+	libbase_la-utils.lo libbase_la-netipc.lo libbase_la-dirs.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -356,7 +355,7 @@ pthread/signalhandler.cpp			\
 ConvertUTF.c					\
 utils.cpp					\
 netipc.cpp					\
-dirs_unix.cpp
+dirs.cpp
 
 all: all-am
 
@@ -456,7 +455,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-ConvertUTF.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-dirs_unix.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-dirs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-netipc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-utils.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@pthread/$(DEPDIR)/libbase_la-attr.Plo@am__quote@
@@ -569,12 +568,12 @@ libbase_la-netipc.lo: netipc.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libbase_la-netipc.lo `test -f 'netipc.cpp' || echo '$(srcdir)/'`netipc.cpp
 
-libbase_la-dirs_unix.lo: dirs_unix.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libbase_la-dirs_unix.lo -MD -MP -MF $(DEPDIR)/libbase_la-dirs_unix.Tpo -c -o libbase_la-dirs_unix.lo `test -f 'dirs_unix.cpp' || echo '$(srcdir)/'`dirs_unix.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libbase_la-dirs_unix.Tpo $(DEPDIR)/libbase_la-dirs_unix.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dirs_unix.cpp' object='libbase_la-dirs_unix.lo' libtool=yes @AMDEPBACKSLASH@
+libbase_la-dirs.lo: dirs.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libbase_la-dirs.lo -MD -MP -MF $(DEPDIR)/libbase_la-dirs.Tpo -c -o libbase_la-dirs.lo `test -f 'dirs.cpp' || echo '$(srcdir)/'`dirs.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libbase_la-dirs.Tpo $(DEPDIR)/libbase_la-dirs.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dirs.cpp' object='libbase_la-dirs.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libbase_la-dirs_unix.lo `test -f 'dirs_unix.cpp' || echo '$(srcdir)/'`dirs_unix.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libbase_la-dirs.lo `test -f 'dirs.cpp' || echo '$(srcdir)/'`dirs.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo

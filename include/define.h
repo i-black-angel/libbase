@@ -61,12 +61,14 @@ typedef     size_t         ssize_t;
 # define    sleep(n)        Sleep((n) * 1000)
 # define    usleep(n)       Sleep((n) / 1000)
 # define    close           _close
+# define    DIRECTORY_SEPARATOR   "\\"
 #else  /* non-windows */
 # ifndef __socket_t_defined
 #  define __socket_t_defined
 typedef int socket_t;
 # endif
 # define    closesocket     close
+# define    DIRECTORY_SEPARATOR   "/"
 #endif
 
 #ifndef __byte_defined

@@ -14,5 +14,6 @@
 #include "datahandler.h"
 #include "signalhandler.h"
 #include "netipc.h"
+#include "bprocess.h"
 
 #endif /* _BASE_H_ */

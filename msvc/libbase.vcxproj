@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\attr.h" />
     <ClInclude Include="..\include\base.h" />
+    <ClInclude Include="..\include\bprocess.h" />
     <ClInclude Include="..\include\cond.h" />
     <ClInclude Include="..\include\ConvertUTF.h" />
     <ClInclude Include="..\include\datahandler.h" />
@@ -99,6 +100,7 @@
     <ClInclude Include="..\include\utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\bprocess.cpp" />
     <ClCompile Include="..\src\ConvertUTF.c" />
     <ClCompile Include="..\src\dirs.cpp" />
     <ClCompile Include="..\src\netipc.cpp" />

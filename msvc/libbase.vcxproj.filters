@@ -63,6 +63,9 @@
     <ClInclude Include="..\include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\bprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ConvertUTF.c">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\dirs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bprocess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

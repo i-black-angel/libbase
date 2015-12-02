@@ -2,14 +2,14 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libbase], [2.2.0], [iblackangel@163.com])
+AC_INIT([libbase], [2.0.3], [iblackangel@163.com])
 AC_CONFIG_SRCDIR([src/ConvertUTF.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 lt_current="2"
-lt_revision="2"
+lt_revision="3"
 lt_age="0"
 LTLDFLAGS="-version-info ${lt_current}:${lt_revision}:${lt_age}"
 AC_SUBST(LTLDFLAGS)

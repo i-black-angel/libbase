@@ -24,7 +24,7 @@ namespace base {
 		/**
 		 * Mutex constructure
 		 */
-		Mutex() {
+		inline Mutex() {
 			InitializeCriticalSection(&cs);
 		}		
 		/**
@@ -37,7 +37,7 @@ namespace base {
 		/** 
 		 * Lock a mutex
 		 */
-		void lock() {
+		inline void lock() {
 			EnterCriticalSection(&cs);
 		}
 		
@@ -47,18 +47,22 @@ namespace base {
 		 * @return true success
 		 * @return false failed
 		 */
-		bool trylock() {
+		inline bool trylock() {
 			return (TryEnterCriticalSection(&cs)) ? true : false;
 		}
 
 		/** 
 		 * Unlock a mutex
 		 */
-		void unlock() {
+		inline void unlock() {
 			LeaveCriticalSection(&cs);
 		}
 	private:
 		CRITICAL_SECTION cs;
+
+		// Disable copy construction and assignment
+		Mutex(const Mutex &);
+		Mutex & operator = (const Mutex &);
 	};
 
 #else  // linux
@@ -73,7 +77,7 @@ namespace base {
 		/**
 		 * Mutex constructure
 		 */
-		Mutex() {
+		inline Mutex() {
 			int rc = pthread_mutex_init(&_mutex, NULL);
 		}
 		/**
@@ -86,7 +90,7 @@ namespace base {
 		/** 
 		 * Lock a mutex
 		 */
-		void lock() {
+		inline void lock() {
 			int rc = pthread_mutex_lock(&_mutex);
 		}
 		
@@ -96,7 +100,7 @@ namespace base {
 		 * @return true success
 		 * @return false failed
 		 */
-		bool trylock() {
+		inline bool trylock() {
 			int rc = pthread_mutex_trylock(&_mutex);
 			if (EBUSY == rc) return false;
 			return true;
@@ -105,21 +109,37 @@ namespace base {
 		/** 
 		 * Unlock a mutex
 		 */
-		void unlock() {
+		inline void unlock() {
 			int rc = pthread_mutex_unlock(&_mutex);
 		}
 		pthread_mutex_t *mutex() { return &_mutex; }
 	private:
 		pthread_mutex_t _mutex;
+
+		// Disable copy construction and assignment.
+		Mutex( const Mutex &);
+		Mutex &operator = (const Mutex &);
 	};
 #endif /* BASE_HAVE_WINDOWS */
+}
 
+namespace base {
 	class LIBBASE_API ScopeLock {
 	public:
-		ScopeLock(Mutex &mutex) { _mutex = mutex; _mutex.lock(); }
-		virtual ~ScopeLock() { _mutex.unlock(); }
+		ScopeLock(Mutex &mutex)
+			: _mutex(mutex)
+		{
+			_mutex.lock();
+		}
+		virtual ~ScopeLock() {
+			_mutex.unlock();
+		}
 	private:
-		Mutex _mutex;
+		Mutex &_mutex;
+
+		// Disable copy construction and assignment
+		ScopeLock(const ScopeLock &);
+		ScopeLock& operator=(const ScopeLock &rhs);
 	};
 }
 

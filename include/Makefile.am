@@ -15,4 +15,5 @@ datahandler.h					\
 signalhandler.h					\
 netipc.h					\
 dirs.h						\
+crc.h                                           \
 bprocess.h

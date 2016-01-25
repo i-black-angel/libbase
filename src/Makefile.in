@@ -128,7 +128,7 @@ am_libbase_la_OBJECTS = pthread/libbase_la-thread.lo \
 	pthread/libbase_la-rwlock.lo \
 	pthread/libbase_la-signalhandler.lo libbase_la-ConvertUTF.lo \
 	libbase_la-utils.lo libbase_la-netipc.lo libbase_la-dirs.lo \
-	libbase_la-bprocess.lo
+	libbase_la-crc.lo libbase_la-bprocess.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -357,6 +357,7 @@ ConvertUTF.c					\
 utils.cpp					\
 netipc.cpp					\
 dirs.cpp					\
+crc.cpp                                         \
 bprocess.cpp
 
 all: all-am
@@ -458,6 +459,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-ConvertUTF.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-bprocess.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-crc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-dirs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-netipc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libbase_la-utils.Plo@am__quote@
@@ -577,6 +579,13 @@ libbase_la-dirs.lo: dirs.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dirs.cpp' object='libbase_la-dirs.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libbase_la-dirs.lo `test -f 'dirs.cpp' || echo '$(srcdir)/'`dirs.cpp
+
+libbase_la-crc.lo: crc.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libbase_la-crc.lo -MD -MP -MF $(DEPDIR)/libbase_la-crc.Tpo -c -o libbase_la-crc.lo `test -f 'crc.cpp' || echo '$(srcdir)/'`crc.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libbase_la-crc.Tpo $(DEPDIR)/libbase_la-crc.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='crc.cpp' object='libbase_la-crc.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libbase_la-crc.lo `test -f 'crc.cpp' || echo '$(srcdir)/'`crc.cpp
 
 libbase_la-bprocess.lo: bprocess.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbase_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libbase_la-bprocess.lo -MD -MP -MF $(DEPDIR)/libbase_la-bprocess.Tpo -c -o libbase_la-bprocess.lo `test -f 'bprocess.cpp' || echo '$(srcdir)/'`bprocess.cpp

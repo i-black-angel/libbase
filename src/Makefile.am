@@ -19,4 +19,5 @@ ConvertUTF.c					\
 utils.cpp					\
 netipc.cpp					\
 dirs.cpp					\
+crc.cpp                                         \
 bprocess.cpp

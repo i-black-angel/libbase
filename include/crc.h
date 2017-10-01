@@ -1,8 +1,7 @@
 #ifndef _CRC_H_
 #define _CRC_H_
 
-#include <stdint.h>
-#include "define.h"
+#include <base/stdheader.h>
 
 namespace base {
 	uint16_t crc16_compute(const uint8_t *data, uint32_t length);

@@ -15,23 +15,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# export headers.
-include_HEADERS =				\
-thread.h					\
-attr.h						\
-rwlock.h					\
-mutex.h						\
-SimpleIni.h					\
-timeutil.h					\
-cond.h						\
-define.h					\
-ConvertUTF.h					\
-utils.h						\
-platform.h					\
-base.h						\
-datahandler.h					\
-signalhandler.h					\
-netipc.h					\
-dirs.h						\
-crc.h                                           \
-bprocess.h
+lib_LTLIBRARIES = libbase.la
+
+# library version
+libbase_la_LDFLAGS=$(LTLDFLAGS)
+
+######################################
+# Cflags and Libs
+# libbase_la_CPPFLAGS = -I$(top_srcdir)/include $(all_includes)
+# libbase_la_CXXFLAGS = $(LIBICONV_CFLAGS)
+libbase_la_LIBADD = -lpthread
+
+libbase_la_SOURCES =				\
+hostaddress.cpp
+
+bin_PROGRAMS = 

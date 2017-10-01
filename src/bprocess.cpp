@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef _MSC_VER
-# include <process.h>
-#else
-# include <unistd.h>
-#endif
 #include "bprocess.h"
 
 namespace base {

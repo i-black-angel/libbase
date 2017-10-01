@@ -15,23 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# export headers.
-include_HEADERS =				\
-thread.h					\
-attr.h						\
-rwlock.h					\
-mutex.h						\
-SimpleIni.h					\
-timeutil.h					\
-cond.h						\
-define.h					\
-ConvertUTF.h					\
-utils.h						\
-platform.h					\
-base.h						\
-datahandler.h					\
-signalhandler.h					\
-netipc.h					\
-dirs.h						\
-crc.h                                           \
-bprocess.h
+noinst_PROGRAMS = test-address
+
+test_address_CPPFLAGS = 
+test_address_LDADD = ../base/libbase.la
+test_address_SOURCES = test-address.cpp

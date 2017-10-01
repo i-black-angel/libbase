@@ -595,7 +595,7 @@ PACKAGE_STRING='libbase 2.0.3'
 PACKAGE_BUGREPORT='iblackangel@163.com'
 PACKAGE_URL=''
 
-ac_unique_file="src/ConvertUTF.c"
+ac_unique_file="base/global.h"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -16118,7 +16118,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile include/Makefile src/Makefile"
+ac_config_files="$ac_config_files Makefile base/Makefile test/Makefile"
 
 ac_config_files="$ac_config_files libbase.pc"
 
@@ -17230,8 +17230,8 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
-    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
+    "base/Makefile") CONFIG_FILES="$CONFIG_FILES base/Makefile" ;;
+    "test/Makefile") CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
     "libbase.pc") CONFIG_FILES="$CONFIG_FILES libbase.pc" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

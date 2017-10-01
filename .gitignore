@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# misc
+Makefile
+.libs
+.deps
+stamp-h1

@@ -13,14 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef _DEFINE_H_
-#define _DEFINE_H_
+#ifndef _BASE_GLOBAL_H_
+#define _BASE_GLOBAL_H_
 
-#include "platform.h"
-
+/* Include standard headers */
+#include <stdio.h>
+#include <ctype.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <errno.h>
 #include <stdint.h>
+#include <stdarg.h>
 
-#ifdef BASE_HAVE_WINDOWS
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+#include <fstream>
+#include <locale>
+
+#ifdef _MSC_VER
+# ifndef BASE_OS_WIN
+#  define BASE_OS_WIN
+# endif
+#else
+# ifndef BASE_OS_POSIX
+#  define BASE_OS_POSIX
+# endif
+#endif
+
+#ifdef BASE_OS_WIN
 # include <ws2tcpip.h>
 # include <winsock2.h>
 # include <windows.h>
@@ -28,23 +53,26 @@
 # include <process.h>    /* _beginthreadex */
 # include <direct.h>     /* _getcwd */
 # include <shlwapi.h>	 /* PathRemoveFileSpec */
-
-#ifndef _CRT_SECURE_NO_WARNINGS
-# define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
-#endif
-
-#pragma comment(lib,"ws2_32.lib")
-#pragma comment(lib, "shlwapi.lib")
 #else
 # include <unistd.h>
-# include <stdint.h>
 # include <sys/socket.h>
 # include <arpa/inet.h>
 # include <netdb.h>
 # include <pthread.h>
+# include <getopt.h>
+# include <syslog.h>
 #endif
 
-#ifdef BASE_HAVE_WINDOWS
+/* Definitions */
+#ifdef BASE_OS_WIN
+#ifndef _CRT_SECURE_NO_WARNINGS
+# define _CRT_SECURE_NO_WARNINGS	// stupid MSFT "deprecation" warning
+#endif
+#pragma comment(lib,"ws2_32.lib")
+#pragma comment(lib, "shlwapi.lib")
+#endif
+
+#ifdef BASE_OS_WIN
 # ifndef __socket_t_defined
 #  define __socket_t_defined
 typedef SOCKET socket_t;
@@ -80,12 +108,24 @@ typedef int socket_t;
 typedef unsigned char byte;
 #endif
 
-#define BASE_OK     0
-#define BASE_ERROR  1
-
 #ifndef _MSC_VER
 # define WINAPI
 # define CALLBACK
 #endif
 
-#endif /* _DEFINE_H_ */
+#define BASE_OK     0
+#define BASE_ERROR  1
+
+#ifdef __cplusplus
+
+# define BASE_BEGIN_NAMESPACE namespace base {
+# define BASE_END_NAMESPACE }
+
+#else /* __cplusplus */
+
+# define BASE_BEGIN_NAMESPACE 
+# define BASE_END_NAMESPACE
+
+#endif /* __cplusplus */
+
+#endif /* _BASE_GLOBAL_H_ */

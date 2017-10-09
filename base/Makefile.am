@@ -29,4 +29,4 @@ libbase_la_LIBADD = -lpthread
 libbase_la_SOURCES =				\
 hostaddress.cpp
 
-bin_PROGRAMS = 
+

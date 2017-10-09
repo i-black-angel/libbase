@@ -46,5 +46,10 @@ int main(int argc, char *argv[])
 
 	base::HostAddress addr6(0x7f213347);
 	std::cout << addr6.toString() << std::endl;
+	std::cout << addr6 << std::endl;
+
+	base::HostAddress addr7;
+	std::cin >> addr7;
+	std::cout << addr7 << std::endl;
     return 0;
 }

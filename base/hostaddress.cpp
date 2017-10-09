@@ -126,18 +126,18 @@ std::string HostAddress::toString() const
 
 bool HostAddress::isEqual(const HostAddress &address) const
 {
-	return false;
+	return _ip4addr == address._ip4addr;
 }
 
 bool HostAddress::operator ==(const HostAddress &address) const
 {
-	return false;
+	return isEqual(address);
 }
 
-bool HostAddress::operator ==(SpecialAddress other) const
+bool HostAddress::operator ==(SpecialAddress address) const
 {
 	uint32_t ip4 = INADDR_ANY;
-	switch (other) {
+	switch (address) {
 	case Null:
 		ip4 = INADDR_NONE;
 		break;;
@@ -156,17 +156,39 @@ bool HostAddress::operator ==(SpecialAddress other) const
 
 bool HostAddress::isNull() const
 {
+	if ((_ip4addr & 0xFFFFFFFF) == 0xFFFFFFFF)
+		return true;
 	return false;
 }
 
 bool HostAddress::isLoopback() const
 {
+	if ((_ip4addr & 0xFF000000) == 0x7F000000)
+		return true;
 	return false;
 }
 
 bool HostAddress::isMulticast() const
 {
+	if ((_ip4addr & 0xF0000000) == 0xE0000000)
+        return true; // 224.0.0.0-239.255.255.255 (including v4-mapped IPv6 addresses)
 	return false;
+}
+
+std::ostream &operator<<(std::ostream &out, const HostAddress &address)
+{
+	char buf[12] = {0x00};
+	snprintf(buf, sizeof(buf) - 1, "0x%08x", address.toIPv4Address());
+	out << buf;
+	return out;
+}
+
+std::istream &operator>>(std::istream &in, HostAddress &address)
+{
+	uint32_t ip4;
+	in >> ip4;
+	address.setAddress(ip4);
+	return in;
 }
 
 BASE_END_NAMESPACE

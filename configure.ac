@@ -16,7 +16,7 @@
 # limitations under the License.
 
 AC_PREREQ([2.69])
-AC_INIT([libbase], [2.0.4], [iblackangel@163.com])
+AC_INIT([libbase], [2.0.5], [iblackangel@163.com])
 AC_CONFIG_SRCDIR([base/global.h])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])

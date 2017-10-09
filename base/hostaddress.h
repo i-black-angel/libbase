@@ -63,6 +63,14 @@ private:
 	uint32_t _ip4addr;
 };
 
+inline bool operator ==(HostAddress::SpecialAddress address1, const HostAddress &address2)
+{ return address2 == address1; }
+inline bool operator !=(HostAddress::SpecialAddress address1, const HostAddress &address2)
+{ return address2 != address1; }
+
+std::ostream &operator<<(std::ostream &, const HostAddress &);
+std::istream &operator>>(std::istream &, HostAddress &);
+
 BASE_END_NAMESPACE
 
 #endif /* _HOSTADDRESS_H_ */

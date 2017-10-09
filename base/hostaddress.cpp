@@ -67,10 +67,22 @@ void HostAddress::setAddress(uint32_t ip4Addr)
 bool HostAddress::setAddress(const std::string &address)
 {
 	int res;
-	struct in_addr ipv4addr;
-	res = inet_pton(AF_INET, address.c_str(), &ipv4addr);
-	if (res > 0) {
-		_ip4addr = ipv4addr.s_addr;
+	struct addrinfo *ailist = NULL, *aip = NULL;
+	struct addrinfo hint;
+	hint.ai_flags = 0;
+	hint.ai_family = 0;
+	hint.ai_socktype = SOCK_STREAM;
+	hint.ai_protocol = 0;
+	hint.ai_addrlen = 0;
+	hint.ai_canonname = NULL;
+	hint.ai_addr = NULL;
+	hint.ai_next = NULL;
+
+	getaddrinfo(address.c_str(), NULL, &hint, &ailist);
+
+	for (aip = ailist; aip != NULL; aip = aip->ai_next) {
+		struct sockaddr_in *addr = (sockaddr_in *)aip->ai_addr;
+		_ip4addr = htonl(addr->sin_addr.s_addr);
 		return true;
 	}
 	return false;
@@ -93,7 +105,7 @@ void HostAddress::setAddress(SpecialAddress address)
 		break;
 	}
 
-	_ip4addr = ntohl(ip4);
+	_ip4addr = ip4;
 }
 
 
@@ -105,10 +117,56 @@ uint32_t HostAddress::toIPv4Address() const
 std::string HostAddress::toString() const
 {
 	char str[INET_ADDRSTRLEN] = { 0x00 };
-	if (NULL == inet_ntop(AF_INET, &_ip4addr, str, sizeof(str))) {
+	uint32_t ip4 = ntohl(_ip4addr);
+	if (NULL == inet_ntop(AF_INET, &ip4, str, sizeof(str))) {
 		return std::string();
 	}
 	return std::string(str);
+}
+
+bool HostAddress::isEqual(const HostAddress &address) const
+{
+	return false;
+}
+
+bool HostAddress::operator ==(const HostAddress &address) const
+{
+	return false;
+}
+
+bool HostAddress::operator ==(SpecialAddress other) const
+{
+	uint32_t ip4 = INADDR_ANY;
+	switch (other) {
+	case Null:
+		ip4 = INADDR_NONE;
+		break;;
+	case Broadcast:
+		ip4 = INADDR_BROADCAST;
+		break;
+	case LocalHost:
+		ip4 = INADDR_LOOPBACK;
+		break;
+	case Any:
+		break;
+	}
+
+	return ip4 == _ip4addr;
+}
+
+bool HostAddress::isNull() const
+{
+	return false;
+}
+
+bool HostAddress::isLoopback() const
+{
+	return false;
+}
+
+bool HostAddress::isMulticast() const
+{
+	return false;
 }
 
 BASE_END_NAMESPACE

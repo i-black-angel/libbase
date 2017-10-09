@@ -18,7 +18,7 @@
 int main(int argc, char *argv[])
 {
 	base::HostAddress address;
-	if (address.setAddress("192.168.10.70")) {
+	if (address.setAddress("www.sina.com")) {
 		std::cout << address.toString() << std::endl;
 		printf ("0x%x\n", address.toIPv4Address());
 	} else {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	base::HostAddress addr5 = address;
 	std::cout << addr5.toString() << std::endl;
 
-	base::HostAddress addr6(0xc);
+	base::HostAddress addr6(0x7f213347);
 	std::cout << addr6.toString() << std::endl;
     return 0;
 }

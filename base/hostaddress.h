@@ -48,6 +48,17 @@ public:
 
 	uint32_t toIPv4Address() const;
 	std::string toString() const;
+
+	bool isEqual(const HostAddress &address) const;
+	bool operator ==(const HostAddress &address) const;
+	bool operator ==(SpecialAddress address) const;
+	inline bool operator !=(const HostAddress &address) const
+		{ return !operator==(address); }
+	inline bool operator !=(SpecialAddress address) const
+		{ return !operator==(address); }
+	bool isNull() const;
+	bool isLoopback() const;
+	bool isMulticast() const;
 private:
 	uint32_t _ip4addr;
 };

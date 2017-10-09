@@ -36,3 +36,4 @@ Makefile
 .libs
 .deps
 stamp-h1
+autom4te.cache

@@ -26,5 +26,5 @@ pkgconfig_DATA=libbase.pc
 include_HEADERS=base.h
 basedir=$(includedir)/base
 base_HEADERS=					\
-base/global.h					\
+base/platformdef.h					\
 base/hostaddress.h

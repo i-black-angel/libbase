@@ -139,7 +139,7 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libbase_la_DEPENDENCIES =
-am_libbase_la_OBJECTS = hostaddress.lo
+am_libbase_la_OBJECTS = hostaddress.lo dir.lo
 libbase_la_OBJECTS = $(am_libbase_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -341,7 +341,8 @@ libbase_la_LDFLAGS = $(LTLDFLAGS)
 # libbase_la_CXXFLAGS = $(LIBICONV_CFLAGS)
 libbase_la_LIBADD = -lpthread
 libbase_la_SOURCES = \
-hostaddress.cpp
+hostaddress.cpp					\
+dir.cpp
 
 all: all-am
 
@@ -422,6 +423,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dir.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hostaddress.Plo@am__quote@
 
 .cpp.o:

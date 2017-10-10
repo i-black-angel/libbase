@@ -27,6 +27,7 @@ libbase_la_LDFLAGS=$(LTLDFLAGS)
 libbase_la_LIBADD = -lpthread
 
 libbase_la_SOURCES =				\
-hostaddress.cpp
+hostaddress.cpp					\
+dir.cpp
 
 

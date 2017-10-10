@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef _HOSTADDRESS_H_
-#define _HOSTADDRESS_H_
+#ifndef _BASE_HOSTADDRESS_H_
+#define _BASE_HOSTADDRESS_H_
 
-#include <base/global.h>
+#include <base/platformdef.h>
 
 BASE_BEGIN_NAMESPACE
 

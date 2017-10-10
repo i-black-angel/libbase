@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef _BASE_GLOBAL_H_
-#define _BASE_GLOBAL_H_
+#ifndef _BASE_PLATFORMDEF_H_
+#define _BASE_PLATFORMDEF_H_
 
 /* Include standard headers */
 #include <stdio.h>
@@ -128,4 +128,4 @@ typedef unsigned char byte;
 
 #endif /* __cplusplus */
 
-#endif /* _BASE_GLOBAL_H_ */
+#endif /* _BASE_PLATFORMDEF_H_ */

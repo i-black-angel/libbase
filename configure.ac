@@ -16,8 +16,8 @@
 # limitations under the License.
 
 AC_PREREQ([2.69])
-AC_INIT([libbase], [2.0.5], [iblackangel@163.com])
-AC_CONFIG_SRCDIR([base/global.h])
+AC_INIT([libbase], [2.0.6], [iblackangel@163.com])
+AC_CONFIG_SRCDIR([base/platformdef.h])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
@@ -55,6 +55,6 @@ AC_CHECK_FUNCS([gettimeofday memmove memset strerror strtol])
 
 AC_CONFIG_FILES([Makefile
                  base/Makefile
-		 test/Makefile])
+		test/Makefile])
 AC_CONFIG_FILES([libbase.pc])
 AC_OUTPUT

@@ -16,7 +16,7 @@
 #ifndef _BASE_H_
 #define _BASE_H_
 
-#include <base/global.h>
+#include <base/platformdef.h>
 #include <base/hostaddress.h>
 
 #endif /* _BASE_H_ */
